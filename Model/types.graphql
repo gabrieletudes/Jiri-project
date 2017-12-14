@@ -1,0 +1,98 @@
+# The following types define the data model of the example service
+# based on which the GraphQL API is generated
+
+type User @model{
+  id: ID! @isUnique
+  softDelete: Boolean!
+  isAdmin: Boolean!
+  name: String!
+  password: String!
+  email: String! @isUnique
+  company: String
+  meetings: [Meeting!]! @relation(name: "MeetingsForUser")
+  events:[Event!]! @relation(name: "EventsForUser")
+  juryEvents:[Event!]! @relation(name: "JurysForUser")
+}
+
+type Student @model{
+  id: ID! @isUnique
+  name: String!
+  email: String! @isUnique
+  softDelete: Boolean!
+  implementations: [Implementation!]! @relation(name: "ImplementationsForStudent")
+  meetings: [Meeting!]! @relation(name: "MeetingsForStudent")
+  studentEvents: [Event!]! @relation(name: "EventsForStudent")
+  performance: Performance @relation(name: "PerformancesForStudent")
+}
+
+type Event @model{
+  id: ID! @isUnique
+  softDelete: Boolean!
+  courseName: String!
+  academicYear: String!
+  author: User! @relation(name: "EventsForUser")
+  jurys: [User!]! @relation(name: "JurysForUser")
+  meetings: [Meeting!]! @relation(name: "MeetingsForEvent")
+  students:[Student!]! @relation(name: "EventsForStudent")
+  implementations: [Implementation!]! @relation(name: "ImplementationsForEvent")
+  performances: [Performance!]! @relation(name: "PerformancesForEvent")
+}
+
+type Meeting @model{
+  id: ID! @isUnique
+  softDelete: Boolean!
+  evaluation: Float
+  author: User! @relation(name: "MeetingsForUser")
+  student: Student! @relation(name: "MeetingsForStudent")
+  event: Event! @relation(name: "MeetingsForEvent")
+  scores: [Score!]! @relation(name: "ScoresForMeeting")
+}
+
+type Performance @model{
+  id: ID! @isUnique
+  softDelete: Boolean!
+  calculatedScore: Float
+  manualScore: Float
+  student: Student! @relation(name: "PerformancesForStudent")
+  event: Event! @relation(name: "PerformancesForEvent")
+}
+
+type Score @model{
+  id: ID! @isUnique
+  softDelete: Boolean!
+  comment: String
+  meeting: Meeting! @relation(name: "ScoresForMeeting")
+  implementation: Implementation! @relation(name: "ScoresForImplementation")
+  score: Float
+}
+
+type Implementation @model{
+  id: ID! @isUnique
+  softDelete: Boolean!
+  project: Project! @relation(name: "ImplementationsForProject")
+  student: Student! @relation(name: "ImplementationsForStudent")
+  scores: [Score!]! @relation(name: "ScoresForImplementation")
+  urlProject: String
+  urlRepo: String
+  weight: Float!
+  event: Event! @relation(name: "ImplementationsForEvent")
+}
+
+type Project @model{
+  id: ID! @isUnique
+  softDelete: Boolean!
+  name: String!
+  description: String!
+  implemantations: [Implementation!]! @relation(name: "ImplementationsForProject")
+}
+
+
+# Uncomment the model below as well
+
+# type Post @model {
+#   id: ID! @isUnique
+#   title: String!
+#
+#   # Every relation also required a back-relation (to determine 1:1, 1:n or n:m)
+#   author: User! @relation(name: "UserPosts")
+# }

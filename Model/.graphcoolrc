@@ -1,0 +1,3 @@
+targets:
+  Jiri: shared-eu-west-1/cjb6gsrro1a4n0181jb30j9sj
+  default: Jiri
