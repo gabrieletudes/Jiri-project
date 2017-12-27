@@ -1,0 +1,20 @@
+import gql from 'graphql-tag'
+
+export const QUERY_ALL_STUDENTS = gql `
+    query allStudents {
+        allStudents{
+            id
+            name
+            email
+        }
+}`;
+
+export const CREATE_STUDENT_MUTATION = gql `
+    mutation CreatStudent($email: String!, $name: String!, $softDelete: Boolean!) {
+        createStudent(name: $name, email: $email, softDelete: $softDelete) {
+            id
+            name
+            email
+        }
+    }
+`;
