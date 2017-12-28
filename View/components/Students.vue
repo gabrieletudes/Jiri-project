@@ -6,10 +6,10 @@
         <input v-model="name" type="text" name="name" id="name">
         <label for="email">EtudiantEmail</label>
         <input v-model="email" type="email" name="email" id="email">
-        <button type="submit" v-on:click="createStudent({name,email,softDelete:false})">Ajouter l'etudiant</button>
+        <button type="submit" v-on:click="createStudent">Ajouter l'etudiant</button>
       </div>
     </div>
-    <div class="column is-4" v-for="student in allStudents" >
+    <div class="column is-4" v-for="student in students" >
       <div class="box">
         <figure class="media-left">
           <p class="image is-64x64">
@@ -24,37 +24,44 @@
   </div>
 </template>
 <script>
-console.log();
 import {mapGetters, mapActions} from 'vuex'
-import { CREATE_STUDENT_MUTATION } from '../querys/AllStudents.gql'
+import { CREATE_STUDENT_MUTATION, QUERY_ALL_STUDENTS } from '../querys/AllStudents.gql'
+import EventBus from '../event-bus'
 export default {
   data(){
     return{
       name: '',
       email: '',
       softDelete: false,
+      students:{}
     }
   },
-  computed: {
-    ...mapGetters([
-      'allStudents',
-      'student'
-    ])
-  },
-  actions: {
-    ...mapActions([
-      'setAllStudents',
-    ])
+  apollo: {
+    // Query with parameters
+    students: {
+      // gql query
+      query: QUERY_ALL_STUDENTS,
+      update(data){
+        return data.allStudents
+      }
+    },
   },
   methods:{
-    ...mapActions([
-      'createStudent',
-    ])
-  },
-  created(){
-    // set all students
-    this.$store.dispatch('setAllStudents');
-  }
+    createStudent(){
+      let student = {
+        name: this.name,
+        email: this.email,
+        softDelete: this.softDelete,
+      }
+        EventBus.$emit('createStudent',student);
+        this.name = '',
+        this.email = ''
+      }
+    },
+created(){
+  // set all students
+  //this.$store.dispatch('setAllStudents');
+}
 }
 </script>
 <style lang="scss" scoped>
