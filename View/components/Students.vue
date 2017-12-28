@@ -57,11 +57,7 @@ export default {
         this.name = '',
         this.email = ''
       }
-    },
-created(){
-  // set all students
-  //this.$store.dispatch('setAllStudents');
-}
+    }
 }
 </script>
 <style lang="scss" scoped>
