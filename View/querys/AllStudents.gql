@@ -18,6 +18,14 @@ query singleStudent($studentId: ID!) {
   }
   }`;
 
+    export const UPDATE_SINGLE_STUDENT = gql`
+    mutation updateStudent($studentId: ID!, $name: String!, $email: String!) {
+      updateStudent(id: $studentId, name: $name, email: $email) {
+        id
+        name
+        email
+      }
+      }`;
 
 export const CREATE_STUDENT_MUTATION = gql `
     mutation CreatStudent($email: String!, $name: String!, $softDelete: Boolean!) {
