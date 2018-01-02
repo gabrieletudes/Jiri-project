@@ -1,13 +1,5 @@
 import gql from 'graphql-tag'
 
-export const QUERY_ALL_STUDENTS = gql `
-    query allStudents {
-        allStudents{
-            id
-            name
-            email
-        }
-}`;
 export const QUERY_SINGLE_STUDENT = gql`
 query singleStudent($studentId: ID!) {
   Student(id: $studentId) {
@@ -17,6 +9,15 @@ query singleStudent($studentId: ID!) {
     softDelete
   }
   }`;
+
+  export const QUERY_ALL_STUDENTS = gql `
+  query allStudents {
+    allStudents{
+      id
+      name
+      email
+    }
+    }`;
 
     export const UPDATE_SINGLE_STUDENT = gql`
     mutation updateStudent($studentId: ID!, $name: String!, $email: String!) {
