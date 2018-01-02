@@ -11,13 +11,15 @@ Vue.use(VueRouter);
 import Jury from './components/Jury.vue'
 import Login from './components/Login.vue'
 import Students from './components/Students.vue'
+import Student from './components/singleStudent.vue'
 //Define the routes that can be viewed
 const router = new VueRouter({
     mode: 'history',
     routes: [
-        {path: '/', component: Login},
-        {path: '/jury', component: Jury},
-        {path: '/students', component: Students},
+        {path: '/', component: Login, name:'login'},
+        {path: '/jury', component: Jury, name: 'jury'},
+        {path: '/students', component: Students, name: 'students'},
+        {path:'/students/student/:studentId', component: Student, name:'singleStudent'}
     ]
 })
 
