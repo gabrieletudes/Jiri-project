@@ -9,7 +9,7 @@
         <button type="submit" v-on:click="createStudent">Ajouter l'etudiant</button>
       </div>
     </div>
-    <div class="column is-4" v-for="student in students" >
+    <router-link :to="{name: 'singleStudent', params: {studentId: student.id}}"class="column is-4" :key="student.id" v-for="(student, index, key) in students">
       <div class="box">
         <figure class="media-left">
           <p class="image is-64x64">
@@ -20,7 +20,7 @@
           <div class="content is-5" :key="student.id">{{student.name}}</div>
         </div>
       </div>
-    </div>
+    </router-link>
   </div>
 </template>
 <script>
@@ -33,7 +33,7 @@ export default {
       name: '',
       email: '',
       softDelete: false,
-      students:{}
+      students:{},
     }
   },
   apollo: {
@@ -54,8 +54,8 @@ export default {
         softDelete: this.softDelete,
       }
         EventBus.$emit('createStudent',student);
-        this.name = '',
-        this.email = ''
+        this.name = null,
+        this.email = null
       }
     }
 }
