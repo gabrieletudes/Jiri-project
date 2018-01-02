@@ -1,8 +1,10 @@
 <template>
-  <div id="app">
-    <h1>Jiri</h1>
+  <div id="app" class="section">
+    <div class="container">
+    <h1 class="title">Jiri</h1>
     <router-view></router-view>
   </div>
+</div>
 </template>
 
 <script>
@@ -16,7 +18,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="sass" src="bulma">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -26,9 +28,6 @@ export default {
   margin-top: 60px;
 }
 
-h1, h2 {
-  font-weight: normal;
-}
 
 ul {
   list-style-type: none;
