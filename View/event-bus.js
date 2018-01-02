@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import {apolloClient} from './apollo'
-import {CREATE_STUDENT_MUTATION} from './querys/AllStudents.gql'
+import {CREATE_STUDENT_MUTATION, UPDATE_SINGLE_STUDENT} from './querys/AllStudents.gql'
 const EventBus =  new Vue();
 
 export default EventBus;
@@ -24,4 +24,20 @@ EventBus.$on('createStudent', student =>{
       //  store.writeQuery({ query: QUERY_ALL_STUDENTS, data })
       }
     });
-})
+});
+
+EventBus.$on('updateStudent', student =>{
+    const { studentId, name, email, softDelete } = student;
+    apolloClient.mutate({
+      mutation: UPDATE_SINGLE_STUDENT,
+      variables: {
+        studentId: student.studentId,
+        name: student.name,
+        email: student.email,
+        softDelete: student.softDelete,
+      },
+    update: (cache, {data:{createdStudent}}) => {
+      apolloClient.resetStore()
+      }
+    });
+});
