@@ -8,6 +8,16 @@ export const QUERY_ALL_STUDENTS = gql `
             email
         }
 }`;
+export const QUERY_SINGLE_STUDENT = gql`
+query singleStudent($studentId: ID!) {
+  Student(id: $studentId) {
+    id,
+    email,
+    name,
+    softDelete
+  }
+  }`;
+
 
 export const CREATE_STUDENT_MUTATION = gql `
     mutation CreatStudent($email: String!, $name: String!, $softDelete: Boolean!) {
