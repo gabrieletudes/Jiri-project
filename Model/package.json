@@ -1,0 +1,12 @@
+{
+  "name": "Model",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "gabe",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "graphcool-lib": "^0.1.4",
+    "validator": "^9.2.0"
+  }
+}
