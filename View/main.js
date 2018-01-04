@@ -3,9 +3,12 @@ import App from './App.vue'
 import VueRouter from 'vue-router'
 import {apolloProvider} from './apollo'
 import {store} from './store'
-
+import Buefy from 'buefy'
+import 'buefy/lib/buefy.css'
 
 Vue.use(VueRouter);
+
+Vue.use(Buefy);
 
 //import the different views
 import Jury from './components/Jury.vue'
