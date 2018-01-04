@@ -19,7 +19,7 @@ const router = new VueRouter({
         {path: '/', component: Login, name:'login'},
         {path: '/jury', component: Jury, name: 'jury'},
         {path: '/students', component: Students, name: 'students'},
-        {path:'/students/student/:studentId', component: Student, name:'singleStudent'}
+        {path:'/students/student/:studentId', component: Student, name:'singleStudent'},
         {path: '/members', component: Members, name: 'members'},
     ]
 })
