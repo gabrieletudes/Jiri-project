@@ -12,6 +12,7 @@ import Jury from './components/Jury.vue'
 import Login from './components/Login.vue'
 import Students from './components/Students.vue'
 import Student from './components/singleStudent.vue'
+import Members from './components/Members.vue'
 //Define the routes that can be viewed
 const router = new VueRouter({
     mode: 'history',
