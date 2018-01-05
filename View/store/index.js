@@ -8,9 +8,6 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
-        allStudents: [],
-        students:[],
-        student:[]
     },
     getters,
     mutations,
