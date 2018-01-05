@@ -1,6 +1,9 @@
 import Vue from 'vue';
 import {apolloClient} from './apollo'
 import {CREATE_STUDENT_MUTATION, UPDATE_SINGLE_STUDENT} from './querys/AllStudents.gql'
+import {AUTHENTICATE_USER} from './querys/Users.gql'
+import router from './router'
+
 const EventBus =  new Vue();
 
 export default EventBus;
@@ -42,3 +45,21 @@ EventBus.$on('updateStudent', student =>{
     }
   });
 });
+//END for Students
+//For Users
+EventBus.$on('authenticateUser', user =>{
+  const { email, password} = user;
+  apolloClient.mutate({
+    mutation: AUTHENTICATE_USER,
+    variables: {
+      email: user.email,
+      password: user.password,
+    },
+    update: (cache, { data: { authenticateUser } }) => {
+      console.log(authenticateUser);
+      localStorage.setItem('userToken', authenticateUser.token);
+      router.push({ name: 'jury' })
+    }
+    });
+  });
+//END for Users
