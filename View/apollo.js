@@ -1,8 +1,21 @@
 import Vue from 'vue'
 import { ApolloClient } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
+import { ApolloLink } from 'apollo-client-preset'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import VueApollo from 'vue-apollo'
+
+//For authentification
+const authLink = new ApolloLink((operation, forward) => {
+  operation.setContext(
+    {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('userToken')}`,
+      }
+    }
+  )
+  return forward(operation);
+})
 
 const httpLink = new HttpLink({
   // Should use an absolute URL here
@@ -11,7 +24,7 @@ const httpLink = new HttpLink({
 
 // Create the apollo client
 export const apolloClient = new ApolloClient({
-  link: httpLink,
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
   connectToDevTools: true,
 })
