@@ -28,6 +28,9 @@
               <div class="media-content">
                 <div class="content" :key="student.id">{{student.name}}</div>
               </div>
+              <div class="media-right">
+                <button class="button is-danger" type="button" @click="removeElementFromArray(eventstudents,student.id)">Supprimer</button>
+              </div>
             </article>
           </div>
         </div>
@@ -68,6 +71,18 @@ export default {
       }else{
         console.log('The student is already here')
       }
+    },removeElementFromArray(target,element){
+      //stocks the index of the element that is in the target array
+      let theelementindex = target.indexOf(element);
+      //checks if the element exists in the target array
+      if(target.includes(element)){
+        //removes the element from the target array
+        target.splice(theelementindex, 1)
+      }else{
+        console.log('The ' + target + ' is not in the array')
+      }
+    }
+  }
 }
 </script>
 <style lang="scss" >
