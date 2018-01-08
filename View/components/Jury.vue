@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h1 class="title has-text-centered is-bold">Bonjour Dominique</h1>
+    <!--Starts Student add step-->
     <div class="content">
       <h2>Selectionnez les étudiants participants</h2>
       <div class="field has-addons">
@@ -36,19 +37,58 @@
         </div>
       </div>
     </div>
+    <!--End Student add step-->
+    <!--Start Members add step-->
+    <div class="content">
+      <h2>Selectionnez les membres participants</h2>
+      <div class="field has-addons">
+        <div class="select control">
+          <select name="membersforevent" id="membersforevent" v-model="thememberId">
+            <option :disabled="eventmembers.includes(member.id)" v-for="member in members" :key="member.id" :value="member.id">{{member.name}}</option>
+          </select>
+        </div>
+        <div class="constrol">
+          <button type="button" class="button is-primary" @click="addMemberToArray">Ajouter le membre</button>
+        </div>
+      </div>
+    </div>
+    <div v-show="members">
+      <h2 class="subtitle">Les membres participants</h2>
+      <div class="columns is-multiline">
+        <div v-show="eventmembers.includes(member.id)" class="column is-4" :key="member.id" v-for="(member, index, key) in members">
+          <div class="box column">
+            <article class="media">
+              <figure class="media-left">
+                <p class="image is-64x64">
+                  <img src="https://bulma.io/images/placeholders/128x128.png">
+                </p>
+              </figure>
+              <div class="media-content">
+                <div class="content" :key="member.id">{{member.name}}</div>
+              </div>
+              <div class="media-right">
+                <button class="button is-danger" type="button" @click="removeElementFromArray(eventmembers,member.id)">Supprimer</button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End Members add step-->
   </div>
 </template>
 <script>
 import { QUERY_ALL_STUDENTS } from '../querys/AllStudents.gql'
+import { QUERY_ALL_USERS } from '../querys/Users.gql'
 export default {
   data(){
     return{
-      name: '',
-      email: '',
-      softDelete: false,
       thestudentId:'',
+      thememberId:'',
       eventstudents:[],
+      eventmembers:[],
       students:{},
+      members:{},
     }
   },
   apollo: {
@@ -58,6 +98,13 @@ export default {
       query: QUERY_ALL_STUDENTS,
       update(data){
         return data.allStudents
+      }
+    },
+    members: {
+      // gql query
+      query: QUERY_ALL_USERS,
+      update(data){
+        return data.allUsers
       }
     },
   },
@@ -70,6 +117,15 @@ export default {
         this.eventstudents.push(this.thestudentId)
       }else{
         console.log('The student is already here')
+      }
+    },addMemberToArray(){
+      //checks if the memeber is not in the temporary array
+      if(!this.eventmembers.includes(this.thememberId)){
+        console.log('The member is not added yet')
+        //push the member if it is not in the array
+        this.eventmembers.push(this.thememberId)
+      }else{
+        console.log('The member is already here')
       }
     },removeElementFromArray(target,element){
       //stocks the index of the element that is in the target array
