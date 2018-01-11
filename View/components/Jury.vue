@@ -1,43 +1,23 @@
 <template>
   <div class="container">
     <h1 class="title has-text-centered is-bold">Bonjour Dominique</h1>
-    <!--Starts Student add step-->
     <div class="content">
-      <h2>Selectionnez les étudiants participants</h2>
-      <div class="field has-addons">
-        <div class="select control">
-          <select name="studentsforevent" id="studentsforevent" v-model="thestudentId">
-            <option :disabled="eventstudents.includes(student.id)" v-for="student in students" :key="student.id" :value="student.id">{{student.name}}</option>
-          </select>
         </div>
-        <div class="constrol">
-          <button type="button" class="button is-primary" @click="addStudentToArray">Ajouter l’étudiant</button>
         </div>
       </div>
     </div>
-    <div v-show="students">
-      <h2 class="subtitle">Les étudiants à juger</h2>
       <div class="columns is-multiline">
-        <div v-show="eventstudents.includes(student.id)" class="column is-4" :key="student.id" v-for="(student, index, key) in students">
           <div class="box column">
             <article class="media">
-              <figure class="media-left">
-                <p class="image is-64x64">
-                  <img src="https://bulma.io/images/placeholders/128x128.png">
-                </p>
-              </figure>
               <div class="media-content">
-                <div class="content" :key="student.id">{{student.name}}</div>
               </div>
               <div class="media-right">
-                <button class="button is-danger" type="button" @click="removeElementFromArray(eventstudents,student.id)">Supprimer</button>
               </div>
             </article>
           </div>
         </div>
       </div>
     </div>
-    <!--End Student add step-->
     <!--Start Members add step-->
     <div class="content">
       <h2>Selectionnez les membres participants</h2>
@@ -75,6 +55,43 @@
       </div>
     </div>
     <!--End Members add step-->
+    <!--Starts Student add step-->
+    <div class="content">
+      <h2>Selectionnez les étudiants participants</h2>
+      <div class="field has-addons">
+        <div class="select control">
+          <select name="studentsforevent" id="studentsforevent" v-model="thestudentId">
+            <option :disabled="eventstudents.includes(student.id)" v-for="student in students" :key="student.id" :value="student.id">{{student.name}}</option>
+          </select>
+        </div>
+        <div class="constrol">
+          <button type="button" class="button is-primary" @click="addStudentToArray">Ajouter l’étudiant</button>
+        </div>
+      </div>
+    </div>
+    <div v-show="students">
+      <h2 class="subtitle">Les étudiants à juger</h2>
+      <div class="columns is-multiline">
+        <div v-show="eventstudents.includes(student.id)" class="column is-4" :key="student.id" v-for="(student, index, key) in students">
+          <div class="box column">
+            <article class="media">
+              <figure class="media-left">
+                <p class="image is-64x64">
+                  <img src="https://bulma.io/images/placeholders/128x128.png">
+                </p>
+              </figure>
+              <div class="media-content">
+                <div class="content" :key="student.id">{{student.name}}</div>
+              </div>
+              <div class="media-right">
+                <button class="button is-danger" type="button" @click="removeElementFromArray(eventstudents,student.id)">Supprimer</button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End Student add step-->
   </div>
 </template>
 <script>
