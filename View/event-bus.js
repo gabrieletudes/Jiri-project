@@ -1,9 +1,17 @@
+//Vue import
 import Vue from 'vue';
+//ApolloClient import
 import {apolloClient} from './apollo'
+//Student Querys
 import {CREATE_STUDENT_MUTATION, UPDATE_SINGLE_STUDENT} from './querys/AllStudents.gql'
+//User Querys
 import {AUTHENTICATE_USER} from './querys/Users.gql'
+//Event Querys
+import {CREATE_EVENT_MUTATION} from './querys/Events.gql'
+//Router
 import router from './router'
 
+//EventBus creation
 const EventBus =  new Vue();
 
 export default EventBus;
@@ -60,6 +68,42 @@ EventBus.$on('authenticateUser', user =>{
       localStorage.setItem('userToken', authenticateUser.token);
       router.push({ name: 'jury' })
     }
-    });
   });
+});
 //END for Users
+//For Events
+EventBus.$on('createEvent', evenement =>{
+  const { academicYear, courseName, softDelete, authorId, jurysIds, studentsIds, projectsIds, weights } = evenement;
+  apolloClient.mutate({
+    mutation: CREATE_EVENT_MUTATION,
+    variables: {
+      academicYear: evenement.academicYear,
+      courseName: evenement.courseName,
+      softDelete: evenement.softDelete,
+      authorId: evenement.authorId,
+      jurysIds: evenement.jurysIds,
+      studentsIds: evenement.studentsIds
+    },
+    update: (cache, { data: { createEvent } }) => {
+      console.log('Event Created')
+      //const data = proxy.readQuery({ query: TodoAppQuery })
+      console.log(createEvent)
+      console.log(evenement)
+      /*evenement.studentsIds.fetch(
+      console.log()
+    )*/
+
+    evenement.studentsIds.forEach( function(s) {
+      console.log(s)
+      evenement.projectsIds.forEach( function(p) {
+        console.log(p)
+        //console.log()
+        console.log(evenement.projectsIds.indexOf(p))
+        let projectindex = evenement.projectsIds.indexOf(p);
+        let weightindex = evenement.weights[projectindex]
+        console.log(evenement.weights[projectindex])
+      } )
+    } )
+  }
+})
+});
