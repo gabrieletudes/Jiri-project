@@ -109,6 +109,18 @@ export default {
     },
   },
   methods:{
+    addProjectToArray(){
+      //checks if the memeber is not in the temporary array
+      if(!this.eventprojects.ids.includes(this.theproject.id)){
+        console.log('The project is not added yet')
+        console.log(this.eventprojects);
+        //push the member if it is not in the array
+        this.eventprojects.ids.push(this.theproject.id)
+        this.eventprojects.weights.push(this.theproject.weight)
+      }else{
+        console.log('The project is already here')
+      }
+    },
     addStudentToArray(){
       //checks if the student is not in the temporary array
       if(!this.eventstudents.includes(this.thestudentId)){
@@ -134,6 +146,17 @@ export default {
       if(target.includes(element)){
         //removes the element from the target array
         target.splice(theelementindex, 1)
+      }else{
+        console.log('The ' + target + ' is not in the array')
+      }
+    },removeProjectFromArray(target,element){
+      //stocks the index of the element that is in the target array
+      let theelementindex = target.ids.indexOf(element);
+      //checks if the element exists in the target array
+      if(target.ids.includes(element)){
+        //removes the element from the target array
+        target.ids.splice(theelementindex, 1)
+        target.scores.splice(theelementindex, 1)
       }else{
         console.log('The ' + target + ' is not in the array')
       }
