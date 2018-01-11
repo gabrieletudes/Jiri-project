@@ -1,24 +1,29 @@
 <template>
-  <div id="app" class="section">
+  <div id="app">
+    <app-header/>
+    <br>
     <div class="container">
-    <h1 class="title">Jiri</h1>
-    <router-view></router-view>
+      <router-view></router-view>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
+import AppHeader from './components/Header.vue';
 export default {
   name: 'app',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  components: {
+    AppHeader
   }
 }
 </script>
 
-<style lang="sass" src="bulma">
+<style lang="scss" src="bulma">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
