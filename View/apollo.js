@@ -9,8 +9,7 @@ import VueApollo from 'vue-apollo'
 const authLink = new ApolloLink((operation, forward) => {
   operation.setContext(
     {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('userToken')}`,
+      headers: { authorization: `Bearer ${localStorage.getItem('userToken')}`,
       }
     }
   )
