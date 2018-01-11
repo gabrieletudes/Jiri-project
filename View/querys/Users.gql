@@ -1,0 +1,66 @@
+import gql from 'graphql-tag'
+
+export const QUERY_SINGLE_USER = gql`
+query singleUser($userId: ID!) {
+  User(id: $userId) {
+    id,
+    email,
+    name,
+    softDelete
+    company
+  }
+  }`;
+
+export const QUERY_ALL_USERS = gql `
+query allUsers {
+  allUsers{
+    id
+    name
+    email
+    password
+  }
+  }`;
+
+export const UPDATE_SINGLE_USER = gql`
+mutation updateUser($userId: ID!, $name: String!, $email: String!) {
+  updateUser(
+    id: $userId,
+    name: $name,
+    email: $email)
+    {
+    id
+    name
+    email
+  }
+  }`;
+
+export const AUTHENTICATE_USER = gql`
+mutation authenticateUser($email: String!, $password: String!){
+  authenticateUser(email: $email, password: $password) {
+    token
+  }
+  }`;
+
+export const LOGGEDIN_USER_QUERY = gql`
+query loggedInUser {
+  loggedInUser{
+    id
+  }
+  }`;
+
+export const CREATE_USER_MUTATION = gql `
+mutation signupUser($name:String!, $email: String!, $password:String!, $company: String, $isAdmin: Boolean!, $softDelete: Boolean!) {
+  createUser(
+    name:$name,
+    email:$email,
+    password:$password, 
+    company:$company,
+    isAdmin:$isAdmin,
+    softDelete: $softDelete)
+    {
+    id
+    name
+    email
+    password
+  }
+  }`;
