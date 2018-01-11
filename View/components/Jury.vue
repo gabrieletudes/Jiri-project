@@ -85,10 +85,21 @@ import EventBus from '../event-bus'
 export default {
   data(){
     return{
-      thestudentId:'',
-      thememberId:'',
+      academicYear:'2017 - 2018 testing',
+      juryname:'This is the test title',
+      softDelete:false,
+      thestudentId:null,
+      thememberId:null,
+      theproject:{
+        id:null,
+        weight: null
+      },
       eventstudents:[],
       eventmembers:[],
+      eventprojects:{
+        ids:[],
+        weights:[]
+      },
       students:{},
       members:{},
       projects:{}
@@ -170,6 +181,19 @@ export default {
       }else{
         console.log('The ' + target + ' is not in the array')
       }
+    },createEvent(){
+      let evenement = {
+        academicYear: this.academicYear,
+        courseName: this.juryname,
+        softDelete: this.softDelete,
+        authorId: this.$store.state.theuserId,
+        jurysIds: this.eventmembers,
+        studentsIds: this.eventstudents,
+        //only for the implementation
+        projectsIds: this.eventprojects.ids,
+        weights: this.eventprojects.weights
+      }
+      EventBus.$emit('createEvent',evenement);
     }
   }
 }
