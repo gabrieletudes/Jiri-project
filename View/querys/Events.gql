@@ -1,0 +1,24 @@
+import gql from 'graphql-tag'
+
+export const CREATE_EVENT_MUTATION = gql`
+mutation createEvent($academicYear: String!, $courseName: String!, $softDelete: Boolean!, $authorId: ID!, $jurysIds: [ID!], $studentsIds: [ID!], $projectsIds: [ID!]){
+   createEvent(
+     academicYear: $academicYear
+     courseName: $courseName
+     softDelete: $softDelete
+     authorId: $authorId
+     jurysIds: $jurysIds
+     studentsIds: $studentsIds
+     projectsIds: $projectsIds
+   ) {
+   id
+   students{
+     id
+     name
+   }
+   projects{
+     id
+     name
+   }
+   }
+}`;
