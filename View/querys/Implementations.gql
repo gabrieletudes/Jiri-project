@@ -1,0 +1,23 @@
+import gql from 'graphql-tag'
+
+export const CREATE_IMPLEMENTATION_MUTATION = gql `
+mutation createImplementation($eventId: ID, projectId: ID, $weight: Float!, $studentId: ID, $softDelete: Boolean!){
+ createImplementation(
+     eventId: $eventId
+     projectId: $projectId
+     weight: $weight
+     studentId: $studentId
+     softDelete: $softDelete
+
+ ){
+   student{
+     id
+     name
+   }
+   project{
+     name
+     description
+   }
+ }
+}
+};
