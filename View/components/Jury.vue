@@ -80,6 +80,7 @@
 <script>
 import { QUERY_ALL_STUDENTS } from '../querys/AllStudents.gql'
 import { QUERY_ALL_USERS } from '../querys/Users.gql'
+import { QUERY_ALL_PROJECTS } from '../querys/Projects.gql'
 export default {
   data(){
     return{
@@ -89,6 +90,7 @@ export default {
       eventmembers:[],
       students:{},
       members:{},
+      projects:{}
     }
   },
   apollo: {
@@ -107,6 +109,13 @@ export default {
         return data.allUsers
       }
     },
+    projects: {
+      // gql query
+      query: QUERY_ALL_PROJECTS,
+      update(data){
+        return data.allProjects
+      }
+    }
   },
   methods:{
     addProjectToArray(){
