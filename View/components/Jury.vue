@@ -1,23 +1,50 @@
 <template>
   <div class="container">
     <h1 class="title has-text-centered is-bold">Bonjour Dominique</h1>
+    <!--Starts Project add step-->
     <div class="content">
+      <h2>Quels sont les projets de ce jury ?</h2>
+      <div class="column columns box is-7">
+        <div class="field column is-4">
+          <label class="label">Projet</label>
+          <div class="select control">
+            <select name="projectsforevent" id="projectsforevent" v-model="theproject.id">
+              <option :disabled="eventprojects.ids.includes(project.id)" v-for="project in projects" :key="project.id" :value="project.id">{{project.name}}</option>
+            </select>
+          </div>
         </div>
+        <div class="field column is-3">
+          <label class="label">Ponderation</label>
+          <div class="crontrol">
+            <input class="input input-width" v-model="theproject.weight" type="number">
+          </div>
+        </div>
+        <div class="field column">
+          <div class="control">
+            <button type="button" class="button is-primary" @click="addProjectToArray">Ajouter le projet</button>
+          </div>
         </div>
       </div>
     </div>
+    <div v-show="projects">
+      <h2 class="subtitle">Les projets de cet événement</h2>
       <div class="columns is-multiline">
+        <div v-show="eventprojects.ids.includes(project.id)" class="column is-4" :key="project.id" v-for="(project, index, key) in projects">
           <div class="box column">
             <article class="media">
               <div class="media-content">
+                <span class="label">Projet</span>
+                <div class="content" :key="project.id">{{project.name}}</div>
               </div>
               <div class="media-right">
+                <button class="button is-danger" type="button" @click="removeProjectFromArray(eventprojects,project.id)">Supprimer</button>
               </div>
             </article>
           </div>
         </div>
       </div>
     </div>
+    <!--End Projects add step-->
     <!--Start Members add step-->
     <div class="content">
       <h2>Selectionnez les membres participants</h2>
@@ -92,6 +119,9 @@
       </div>
     </div>
     <!--End Student add step-->
+    <div class="field">
+      <button class="button is-primary" @click="createEvent">Creer l'événement</button>
+    </div>
   </div>
 </template>
 <script>
@@ -215,7 +245,10 @@ export default {
   }
 }
 </script>
-<style lang="scss" >
+<style lang="scss" scooped>
+.input-width {
+  width: 4rem;
+}
 .box-style{
   background-color: white;
   border-radius: 5px;
