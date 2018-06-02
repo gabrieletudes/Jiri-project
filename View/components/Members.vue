@@ -1,5 +1,18 @@
 <template>
   <div class="columns is-multiline">
+    <div class="column is-4">
+      <div class="box">
+      <div class="control">
+      <label class="label" for="name">Nom</label>
+      <input  class="input" v-model="name" type="text" name="name" id="name" placeholder="Marie Du bois">
+    </div>
+      <div class="control">
+      <label class="label" for="email">Email</label>
+      <input class="input" v-model="email" type="email" name="email" id="email" placeholder="ex. mariedubois@domain.com">
+      </div>
+      <button class="button is-primary" type="submit" v-on:click="createUser({name,email,softDelete:false})">Ajouter le membre</button>
+</div>
+    </div>
     <div class="column is-4" v-for="member in membres">
       <div class="box">
         <figure class="media-left">
@@ -13,13 +26,6 @@
           <div class="content is-5">{{decryptPassword(member.password)}}</div>
         </div>
       </div>
-    </div>
-    <div class="column">
-      <label for="name">Nom</label>
-      <input v-model="name" type="text" name="name" id="name" placeholder="Marie Du bois">
-      <label for="email">Email</label>
-      <input v-model="email" type="email" name="email" id="email" placeholder="ex. mariedubois@domain.com">
-      <button type="submit" v-on:click="createUser({name,email,softDelete:false})">Ajouter l'etudiant</button>
     </div>
   </div>
 </template>
