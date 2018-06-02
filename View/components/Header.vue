@@ -13,9 +13,8 @@
   </div>
   <div id="navMenuColorlink-example" class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item" :href="'/jury'">
-        Home
-      </a>
+      <router-link  class="navbar-item" :to="{name:'students'}">Students</router-link>
+      <router-link  class="navbar-item" :to="{name:'members'}">Members</router-link>
     </div>
     <div class="navbar-end">
       <div class="navbar-item">
@@ -32,6 +31,7 @@ export default {
   computed: {
     userId () {
       return this.$root.$data.userId
+
     }
   },
   methods: {
