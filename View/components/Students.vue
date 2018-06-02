@@ -1,12 +1,12 @@
 <template>
   <div class="columns is-multiline">
     <div class="column">
-      <div classs="box">
-        <label for="name">Nom</label>
-        <input v-model="name" type="text" name="name" id="name">
-        <label for="email">EtudiantEmail</label>
-        <input v-model="email" type="email" name="email" id="email">
-        <button type="submit" v-on:click="createStudent">Ajouter l'etudiant</button>
+      <div class="box">
+        <label class="label" for="name">Nom</label>
+        <input class="input" v-model="name" type="text" name="name" id="name">
+        <label class="label" for="email">EtudiantEmail</label>
+        <input class="input" v-model="email" type="email" name="email" id="email">
+        <button class="button is-primary"type="submit" v-on:click="createStudent">Ajouter l'etudiant</button>
       </div>
     </div>
     <router-link :to="{name: 'singleStudent', params: {studentId: student.id}}"class="column is-4" :key="student.id" v-for="(student, index, key) in students">
