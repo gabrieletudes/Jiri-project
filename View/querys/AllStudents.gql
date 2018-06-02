@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-export const QUERY_SINGLE_STUDENT = gql`
+export const QUERY_SINGLE_STUDENT = gql `
 query singleStudent($studentId: ID!) {
   Student(id: $studentId) {
     id,
@@ -19,7 +19,7 @@ query singleStudent($studentId: ID!) {
     }
     }`;
 
-    export const UPDATE_SINGLE_STUDENT = gql`
+    export const UPDATE_SINGLE_STUDENT = gql `
     mutation updateStudent($studentId: ID!, $name: String!, $email: String!) {
       updateStudent(id: $studentId, name: $name, email: $email) {
         id
