@@ -2,9 +2,7 @@
   <div>
   <nav class="navbar is-link">
   <div class="navbar-brand">
-    <a class="navbar-item" :href="'/'">
-      Jiri
-    </a>
+    <router-link class="navbar-item" :to="{name:'jury'}">Jiri</router-link>
     <div class="navbar-burger burger" data-target="navMenuColorlink-example">
       <span></span>
       <span></span>
