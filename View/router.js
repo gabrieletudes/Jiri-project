@@ -16,13 +16,39 @@ import {LOGGEDIN_USER_QUERY} from './querys/Users.gql'
 
 //Define the routes that can be viewed
 const routes = [
-        {path: '/', component: Jury, name: 'jury'},
-        {path: '/login', component: Login, name:'login'},
-        {path: '/students', component: Students, name: 'students'},
-        {path: '/students/student', redirect:'students'},
-        {path: '/students/student/:studentId', component: Student, name:'singleStudent'},
-        {path: '/members', component: Members, name: 'members'},
-        {path: '*', redirect:'/'}
+        {
+          path: '/jiri',
+          component: Jury,
+          name: 'jury',
+        },
+        {
+          path: '/jiri/students',
+          component: Students,
+          name: 'students',
+        },
+        {
+          path: 'student/:studentId',
+          component: Student,
+          name:'singleStudent'
+        },
+        {
+          path: '/jiri/members',
+          component: Members,
+          name: 'members'
+        },
+        {
+          path: '/login',
+          component: Login,
+          name:'login'
+        },
+        {
+          path: '',
+          redirect:'/jiri/'
+        },
+        {
+          path: '*',
+          redirect:'/jiri/'
+        }
 ];
 
 Vue.use(VueRouter)
