@@ -2,11 +2,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import {apolloProvider} from './apollo'
 import {store} from './store'
-import Buefy from 'buefy'
-import 'buefy/lib/buefy.css'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 import router from './router'
 
-Vue.use(Buefy);
+Vue.use(ElementUI);
 
 new Vue({
     el: '#app',
