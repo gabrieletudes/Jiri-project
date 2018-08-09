@@ -4,9 +4,11 @@ import {apolloProvider} from './apollo'
 import {store} from './store'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import locale from 'element-ui/lib/locale/lang/fr'
+
 import router from './router'
 
-Vue.use(ElementUI);
+Vue.use(ElementUI, { locale })
 
 new Vue({
     el: '#app',
