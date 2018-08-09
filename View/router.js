@@ -44,8 +44,11 @@ const routes = [
         },
         {
           path: '/login',
-          component: Login,
-          name:'login'
+          name:'login',
+          components: {
+            default: Login,
+            'header': Header
+          }
         },
         {
           path: '',
