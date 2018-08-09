@@ -56,12 +56,12 @@ EventBus.$on('updateStudent', student =>{
 //END for Students
 //For Users
 EventBus.$on('authenticateUser', user =>{
-  const { email, password} = user;
+  const { email, pass} = user;
   apolloClient.mutate({
     mutation: AUTHENTICATE_USER,
     variables: {
       email: user.email,
-      password: user.password,
+      password: user.pass,
     },
     update: (cache, { data: { authenticateUser } }) => {
       console.log(authenticateUser);
