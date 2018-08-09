@@ -5,6 +5,8 @@ import {apolloClient} from './apollo'
 import {store} from './store'
 
 //import the different views
+import Header from './components/Header.vue'
+import SideMenu from './components/SideMenu.vue'
 import Jury from './components/Jury.vue'
 import Login from './components/Login.vue'
 import Students from './components/Students.vue'
