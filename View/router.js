@@ -20,8 +20,12 @@ import {LOGGEDIN_USER_QUERY} from './querys/Users.gql'
 const routes = [
         {
           path: '/jiri',
-          component: Jury,
           name: 'jury',
+          components: {
+            default: Jury,
+            'header': Header,
+            'side-menu': SideMenu
+          }
         },
         {
           path: '/jiri/students',
