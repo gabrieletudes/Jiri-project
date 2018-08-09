@@ -18,6 +18,9 @@ export default {
     logout () {
       localStorage.removeItem('userToken')
       this.$router.push({name: 'login'})
+    },
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
     }
   }
 }
