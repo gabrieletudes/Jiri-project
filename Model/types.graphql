@@ -1,4 +1,4 @@
-# The following types define the data model of the example service
+# The following types define the data model of the Jiri service
 # based on which the GraphQL API is generated
 
 type User @model{
