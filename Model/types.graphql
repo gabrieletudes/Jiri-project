@@ -23,6 +23,14 @@ type Student @model{
   meetings: [Meeting!]! @relation(name: "MeetingsForStudent")
   studentEvents: [Event!]! @relation(name: "EventsForStudent")
   performances: [Performance!]! @relation(name: "PerformancesForStudent")
+  group: Group @relation(name: "GroupForStudent")
+}
+
+type Group @model{
+  id: ID! @isUnique
+  name: String!
+  softDelete: Boolean!
+  students: [Student!]! @relation(name: "GroupForStudent")
 }
 
 type Event @model{
