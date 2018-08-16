@@ -22,7 +22,7 @@ type Student @model{
   implementations: [Implementation!]! @relation(name: "ImplementationsForStudent")
   meetings: [Meeting!]! @relation(name: "MeetingsForStudent")
   studentEvents: [Event!]! @relation(name: "EventsForStudent")
-  performance: Performance @relation(name: "PerformancesForStudent")
+  performances: [Performance!]! @relation(name: "PerformancesForStudent")
 }
 
 type Event @model{
