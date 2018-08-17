@@ -52,6 +52,7 @@ type Meeting @model{
   id: ID! @isUnique
   softDelete: Boolean!
   evaluation: Float
+  comment: String
   author: User! @relation(name: "MeetingsForUser")
   student: Student! @relation(name: "MeetingsForStudent")
   event: Event! @relation(name: "MeetingsForEvent")
