@@ -96,6 +96,7 @@ type Project @model{
   description: String!
   events: [Event!]! @relation(name: "ProjectsForEvent")
   implemantations: [Implementation!]! @relation(name: "ImplementationsForProject")
+  weight: Float!
 }
 
 
