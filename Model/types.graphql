@@ -38,6 +38,7 @@ type Event @model{
   softDelete: Boolean!
   courseName: String!
   academicYear: String!
+  start: DateTime!
   author: User! @relation(name: "EventsForUser")
   jurys: [User!]! @relation(name: "JurysForUser")
   meetings: [Meeting!]! @relation(name: "MeetingsForEvent")
