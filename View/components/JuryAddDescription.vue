@@ -1,5 +1,5 @@
 <template>
-  <el-row type="flex" justify="center" class="box">
+  <el-row type="flex" justify="start" class="box box--light el-row--max-medium box--space">
     <el-col :span="20" class="jury-create">
       <el-form :inline="true" label-position="top" :model="formInline" class="demo-form-inline">
         <el-form-item label="Nom du jury">
@@ -31,4 +31,28 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.el-space {
+  &--bottom-tiny {
+    margin-bottom: 8px;
+  }
+  &--bottom-small {
+    margin-bottom: 16px;
+  }
+  &--bottom-medium {
+    margin-bottom: 32px;
+  }
+  &--v-small {
+    margin: 16px 0;
+  }
+  &--right-bottom-small {
+    margin-right: 16px;
+    margin-bottom: 16px;
+  }
+  &--rigth-small {
+    margin-right: 16px;
+  }
+  &--rigth-medium {
+    margin-right: 24px;
+  }
+}
 </style>
