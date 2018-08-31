@@ -55,6 +55,7 @@ import JuryAddStudents from './JuryAddStudents.vue'
 import JuryAddMembers from './JuryAddMembers.vue'
 // Import Querys
 import { QUERY_FEW_EVENTS } from '../querys/Events.gql'
+// Import EventBus
 import EventBus from '../event-bus'
 export default {
   components: {
