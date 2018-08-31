@@ -48,9 +48,6 @@
   </el-main>
 </template>
 <script>
-import { QUERY_ALL_STUDENTS } from '../querys/AllStudents.gql'
-import { QUERY_ALL_USERS } from '../querys/Users.gql'
-import { QUERY_ALL_PROJECTS } from '../querys/Projects.gql'
 // Import components
 import JuryAddDescription from './JuryAddDescription.vue'
 import JuryAddProjects from './JuryAddProjects.vue'
