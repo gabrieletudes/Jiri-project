@@ -5,7 +5,6 @@ import {apolloClient} from './apollo'
 //Student Querys
 import {CREATE_STUDENT_MUTATION, UPDATE_SINGLE_STUDENT} from './querys/AllStudents.gql'
 //User Querys
-import {AUTHENTICATE_USER} from './querys/Users.gql'
 import {CREATE_USER_MUTATION, AUTHENTICATE_USER} from './querys/Users.gql'
 //Event Querys
 import {CREATE_EVENT_MUTATION} from './querys/Events.gql'
