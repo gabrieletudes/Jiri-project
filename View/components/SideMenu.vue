@@ -30,6 +30,37 @@ export default {
   background-color: white;
   &__menu {
     border-right: none;
+    margin-top: 60px;
+    position: fixed;
+    width: 200px;
+    z-index: 22;
   }
+}
+.el-menu {
+  &--horizontal {
+    padding: 0 20px;
+  }
+}
+.el-menu-item {
+  padding: 0 !important;
+  &.is-active{
+    color:inherit;
+  }
+  &__link {
+    padding: 0 20px;
+    color: inherit;
+    text-decoration: none;
+    display: block;
+    &:active, &:hover, &:focus {
+      color: #409EFF;
+      background-color: #ecf5ff;
+      text-decoration: none;
+    }
+  }
+}
+.el-menu-item__link.router-link-active {
+  color: #409EFF;
+  background-color: #ecf5ff;
+  text-decoration: none;
 }
 </style>
