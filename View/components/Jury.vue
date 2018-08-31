@@ -71,12 +71,22 @@ export default {
       theproject:{
         id:null,
         weight: null
+      active: 0,
+      buttontitle: {
+        titles:[
+          'Modifier la description',
+          'Choisir les projets de ce jury',
+          'Choisir les etudiants de ce jury',
+          'Choisir les membres de ce jury',
+          'Creer le jury'
+        ]
       },
       eventstudents:[],
       eventmembers:[],
       eventprojects:{
         ids:[],
         weights:[]
+      currentComponent: 'jury-add-description',
       },
       students:{},
       members:{},
@@ -172,6 +182,38 @@ export default {
         weights: this.eventprojects.weights
       }
       EventBus.$emit('createEvent',evenement);
+    next() {
+      if (this.active++ > 3) this.active = 1;
+      switch (this.active) {
+          case 0:
+              this.currentComponent = 'jury-add-description';
+              break;
+          case 1:
+              this.currentComponent = 'jury-add-projects';
+              break;
+          case 2:
+              this.currentComponent = 'jury-add-students';
+              break;
+          case 3:
+              this.currentComponent = 'jury-add-members';
+      }
+    },
+    previous() {
+      if (this.active-- < 1) this.active = 1;
+      switch (this.active) {
+          case 0:
+              this.currentComponent = 'jury-add-description';
+              break;
+          case 1:
+              this.currentComponent = 'jury-add-projects';
+              break;
+          case 2:
+              this.currentComponent = 'jury-add-students';
+              break;
+          case 3:
+              this.currentComponent = 'jury-add-members';
+      }
+    },
     }
   }
 }
