@@ -6,6 +6,7 @@ import {apolloClient} from './apollo'
 import {CREATE_STUDENT_MUTATION, UPDATE_SINGLE_STUDENT} from './querys/AllStudents.gql'
 //User Querys
 import {AUTHENTICATE_USER} from './querys/Users.gql'
+import {CREATE_USER_MUTATION, AUTHENTICATE_USER} from './querys/Users.gql'
 //Event Querys
 import {CREATE_EVENT_MUTATION} from './querys/Events.gql'
 //Router
@@ -55,7 +56,23 @@ EventBus.$on('updateStudent', student =>{
 });
 //END for Students
 //For Users
-EventBus.$on('authenticateUser', user =>{
+EventBus.$on('createUser', user => {
+  const { name, email, password, isAdmin, softDelete } = user;
+  apolloClient.mutate({
+    mutation: CREATE_USER_MUTATION,
+    variables: {
+      name,
+      email,
+      password,
+      isAdmin,
+      softDelete
+    },
+    update: (cache, {data:{createdUser}}) => {
+      apolloClient.resetStore()
+    }
+  });
+});
+EventBus.$on('authenticateUser', user => {
   const { email, pass} = user;
   apolloClient.mutate({
     mutation: AUTHENTICATE_USER,
