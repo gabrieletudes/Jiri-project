@@ -219,6 +219,15 @@ export default {
               this.currentComponent = 'jury-add-members';
       }
     },
+    eventDateStrings(startingtime) {
+      let thetime = new Date(startingtime);
+      let dateoptions = { year: 'numeric', month: 'short', day: 'numeric' };
+      return thetime.toLocaleDateString('fr-FR', dateoptions);
+    },
+    eventHourString(startingtime){
+      let thetime = new Date(startingtime);
+      let houroptions = { hour: 'numeric', minute: 'numeric' };
+      return thetime.toLocaleTimeString('fr-FR', houroptions);
     }
   }
 }
