@@ -15,6 +15,7 @@ import Students from './components/Students.vue'
 import Student from './components/singleStudent.vue'
 import Members from './components/Members.vue'
 import Member from './components/singleMember'
+import Projects from './components/Projects.vue'
 
 //Import querys
 import {LOGGEDIN_USER_QUERY} from './querys/Users.gql'
@@ -68,6 +69,14 @@ const routes = [
             'side-menu': SideMenu
           }
         },
+        {
+          path: '/jiri/projets',
+          name: 'projects',
+          components: {
+            default: Projects,
+            'header': Header,
+            'side-menu': SideMenu
+          }
         },
         {
           path: '/login',
