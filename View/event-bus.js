@@ -20,23 +20,18 @@ const EventBus =  new Vue();
 export default EventBus;
 
 //For Students
-EventBus.$on('createStudent', student =>{
-  const { name, email, softDelete } = student;
+EventBus.$on('createStudent', student => {
+  const { name, email, group, softDelete } = student;
   apolloClient.mutate({
     mutation: CREATE_STUDENT_MUTATION,
     variables: {
       name: student.name,
       email: student.email,
+      groupId: student.group,
       softDelete: student.softDelete,
     },
-    update: (cache, {data:{createdStudent}}) => {
+    update: (cache, {data:{createStudent}}) => {
       apolloClient.resetStore()
-      // Read the data from our cache for this query.
-      //  const data = store.readQuery({ query: QUERY_ALL_STUDENTS })
-      // Add our student from the mutation to the end
-      //data.allStudents.push(student.data.createStudent)
-      // Write our data back to the cache.
-      //  store.writeQuery({ query: QUERY_ALL_STUDENTS, data })
     }
   });
 });
