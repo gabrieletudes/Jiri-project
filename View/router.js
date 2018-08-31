@@ -49,7 +49,14 @@ const routes = [
             'side-menu': SideMenu
           }
         },
+        {
+          path: '/jiri/etudiants',
           name: 'students',
+          components: {
+            default: Students,
+            'header': Header,
+            'side-menu': SideMenu
+          }
         },
         {
           path: 'student/:studentId',
