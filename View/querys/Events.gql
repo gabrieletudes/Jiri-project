@@ -32,6 +32,60 @@ query singleEvent($eventId: ID!){
     }
   }
   }`;
+
+export const QUERY_ALL_EVENTS = gql`
+query AllEvents{
+  allEvents (orderBy: start_DESC){
+    id
+    academicYear
+    author {
+      id
+      name
+    }
+    courseName
+    implementations {
+      id
+      project {
+        id
+        name
+      }
+    }
+    jurys {
+      id
+      name
+    }
+    meetings {
+      id
+      student {
+        id
+        name
+        group {
+          id
+          name
+        }
+      }
+    }
+    performances {
+      id
+      student {
+        id
+        name
+      }
+    }
+    projects {
+      id
+      name
+      weight
+    }
+    softDelete
+    start
+    students {
+      id
+      name
+    }
+  }
+}`;
+
 export const CREATE_EVENT_MUTATION = gql`
 mutation createEvent($academicYear: String!, $courseName: String!, $softDelete: Boolean!, $authorId: ID!, $jurysIds: [ID!], $studentsIds: [ID!], $projectsIds: [ID!]){
    createEvent(
