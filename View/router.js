@@ -8,6 +8,7 @@ import {store} from './store'
 import Header from './components/Header.vue'
 import SideMenu from './components/SideMenu.vue'
 import Jury from './components/Jury.vue'
+import Jurys from './components/Jurys.vue'
 import Login from './components/Login.vue'
 import Students from './components/Students.vue'
 import Student from './components/singleStudent.vue'
@@ -28,8 +29,14 @@ const routes = [
           }
         },
         {
-          path: '/jiri/students',
-          component: Students,
+          path: '/jiri/jurys',
+          name: 'jurys',
+          components: {
+            default: Jurys,
+            'header': Header,
+            'side-menu': SideMenu
+          }
+        },
           name: 'students',
         },
         {
