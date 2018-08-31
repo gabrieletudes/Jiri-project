@@ -91,17 +91,20 @@ EventBus.$on('authenticateUser', user => {
 });
 //END for Users
 //For Events
-EventBus.$on('createEvent', evenement =>{
-  const { academicYear, courseName, softDelete, authorId, jurysIds, studentsIds, projectsIds, weights } = evenement;
+EventBus.$on('createEvent', evenement => {
+  const { academicYear, courseName, eventStart, softDelete, authorId, jurysIds, studentsIds, projects } = evenement;
+  let projectsIds = projects.map(project => project.id)
   apolloClient.mutate({
     mutation: CREATE_EVENT_MUTATION,
     variables: {
-      academicYear: evenement.academicYear,
-      courseName: evenement.courseName,
-      softDelete: evenement.softDelete,
-      authorId: evenement.authorId,
-      jurysIds: evenement.jurysIds,
-      studentsIds: evenement.studentsIds
+      academicYear,
+      courseName,
+      softDelete,
+      eventStart,
+      authorId,
+      jurysIds,
+      studentsIds,
+      projectsIds: projectsIds
     },
     update: (cache, { data: { createEvent } }) => {
       evenement.studentsIds.forEach( function(studentid) {
