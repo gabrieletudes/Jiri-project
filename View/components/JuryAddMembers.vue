@@ -85,7 +85,6 @@ export default {
     handleSelect(item) {
       this.newmember.id = item.id;
       this.newmember.name = item.name;
-      console.log(item)
     }
   }
 }
