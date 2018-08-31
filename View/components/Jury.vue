@@ -53,6 +53,8 @@ import JuryAddDescription from './JuryAddDescription.vue'
 import JuryAddProjects from './JuryAddProjects.vue'
 import JuryAddStudents from './JuryAddStudents.vue'
 import JuryAddMembers from './JuryAddMembers.vue'
+// Import Querys
+import { QUERY_FEW_EVENTS } from '../querys/Events.gql'
 import EventBus from '../event-bus'
 export default {
   components: {
@@ -63,14 +65,6 @@ export default {
   },
   data(){
     return{
-      academicYear:'2017 - 2018 testing',
-      juryname:'This is the test title',
-      softDelete:false,
-      thestudentId:null,
-      thememberId:null,
-      theproject:{
-        id:null,
-        weight: null
       active: 0,
       buttontitle: {
         titles:[
@@ -81,34 +75,22 @@ export default {
           'Creer le jury'
         ]
       },
-      eventstudents:[],
-      eventmembers:[],
-      eventprojects:{
-        ids:[],
-        weights:[]
       currentComponent: 'jury-add-description',
       },
-      students:{},
-      members:{},
-      projects:{}
+      juryevents:[],
       academicYears: []
     }
   },
   apollo: {
     // Query with parameters
-    students: {
+    juryevents: {
       // gql query
-      query: QUERY_ALL_STUDENTS,
+      query: QUERY_FEW_EVENTS,
       update(data){
-        return data.allStudents
+        return data.allEvents
       }
-    },
-    members: {
-      // gql query
-      query: QUERY_ALL_USERS,
-      update(data){
-        return data.allUsers
-      }
+    }
+  },
   mounted() {
     //execute createAcademicYears function
     this.createAcademicYears()
