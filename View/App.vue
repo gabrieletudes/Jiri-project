@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view name="header"></router-view>
-    <el-container>
+    <el-container class="el-container--wrap">
       <router-view name="side-menu"></router-view>
       <router-view></router-view>
     </el-container>
