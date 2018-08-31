@@ -3,13 +3,13 @@
     <h1 class="title title--bold title--top-spaced">Projets</h1>
     <div>
     <h2>Ajouter un nouveau projet</h2>
-    <el-row justify="start" align="middle" class="box box--light el-row--max-big box--space">
-      <el-col :xs="24" :sm="14" :md="5" class="el-space--rigth-small">
-        <label for="projecttitle" class="el-space--bottom-tiny member-create__label">Titre</label>
+    <el-row type="flex" justify="start" align="bottom" class="box box--light el-row--max-medium box--space">
+      <el-col :xs="24" :sm="18" :md="7" class="el-space--rigth-small">
+        <label for="projecttitle" class="el-space--bottom-tiny project-create__label">Titre</label>
         <el-input v-model="name" id="projecttitle"></el-input>
       </el-col>
-      <el-col :xs="24" :sm="14" :md="6" class="member-create el-space--rigth-small">
-        <label for="projectdescription" class="el-space--bottom-tiny member-create__label">Email</label>
+      <el-col :xs="24" :sm="18" :md="10" class="project-create el-space--rigth-small">
+        <label for="projectdescription" class="el-space--bottom-tiny project-create__label">Description</label>
         <el-input v-model="description" id="projectdescription" type="textarea"></el-input>
       </el-col>
       <el-col :xs="24" :sm="6" :md="4">
@@ -99,11 +99,11 @@ export default {
   &--max-big {
     max-width: 1200px;
   }
+  &--max-medium {
+    max-width: 768px;
+  }
 }
 .el-col {
-  /*&--max-small {
-    max-width: 282px
-  }*/
   &--space-right-bottom-small{
     margin-right: 16px;
     margin-bottom: 16px;
@@ -131,5 +131,28 @@ export default {
 .el-image {
   margin-right: 16px;
   border-radius: 100%;
+}
+.el-space {
+  &--bottom-tiny {
+    margin-bottom: 8px;
+  }
+  &--bottom-small {
+    margin-bottom: 16px;
+  }
+  &--right-bottom-small {
+    margin-right: 16px;
+    margin-bottom: 16px;
+  }
+  &--rigth-small {
+    margin-right: 16px;
+  }
+  &--rigth-medium {
+    margin-right: 24px;
+  }
+}
+.project-create {
+  &__label {
+    display: flex;
+  }
 }
 </style>
