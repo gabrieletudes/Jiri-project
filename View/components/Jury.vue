@@ -77,6 +77,15 @@ export default {
         ]
       },
       currentComponent: 'jury-add-description',
+      newJury: {
+        thememberId: null,
+        juryname: null,
+        academicYear: null,
+        start: null,
+        softDelete: false,
+        students:[],
+        projects:[],
+        members:[]
       },
       juryevents:[],
       academicYears: []
