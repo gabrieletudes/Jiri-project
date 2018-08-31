@@ -1,82 +1,43 @@
 <template>
-  <div class="column is-12">
-    <div class="box columns">
-      <div class="field column">
-        <label for="name" class="label">Nom de l’etudiant</label>
-        <div class="control">
-          <span v-show="!showField('name')" @dblclick="focusField('name')" class="title is-5">{{student.name}}</span>
-          <input v-show="showField('name')" @focus="focusField('name')" @blur="blurField" id="name" class="input" @keyup.enter="updateStudent" type="text" v-model.lazy="newstudent.name"  placeholder="Text input">
-        </div>
-      </div>
-      <div class="field column">
-        <label for="email" class="label">Email</label>
-        <div class="control">
-          <span v-show="!showField('email')" @dblclick="focusField('email')" class="subtitle">{{student.email}}</span>
-          <input v-show="showField('email')" @focus="focusField('email')" @blur="blurField" id="email" class="input" @keyup.enter="updateStudent" type="text" v-model.lazy="newstudent.email"  placeholder="Text input">
-        </div>
-      </div>
+  <el-main>
+    <h1 class="title title--bold title--top-spaced">Étudiant</h1>
+    <!--START add member form-->
+    <div>
+      <el-row class="el-row--max-big">
+        <el-col :xs="24" :sm="14" :md="11" class="el-col--max-small el-col--space-right-bottom-small box box--aligned-center box--light box--space-small">
+          <img src="/dist/assets/temp-placeholder.jpg" width="auto" height="96" class="el-image">
+          <div class="">
+            <h2>{{student.name}}</h2>
+            <p>{{student.email}}</p>
+            <p>{{student.group.name}}</p>
+          </div>
+        </el-col>
+      </el-row>
     </div>
-    <!--END student info-->
-    <h3 class="title is-6 has-text-weight-normal">Ajouter un nouveau projet</h3>
-    <div class="column is-6">
-      <div class="box columns is-multiline is-6">
-        <div class="column control is-4">
-          <label for="projecttitle" class="label">Nom du projet</label>
-          <input id="projecttitle" class="input" type="text" v-model.lazy="newproject.title"  placeholder="Text input">
+    <div>
+    <h2>Les jurys auquel l’étudiant participe</h2>
+    <el-row v-if="student.studentEvents.length" type="flex" :gutter="20">
+      <el-col :span="8" class="el-col--max-small" v-for="singleevent in student.studentEvents" :key="singleevent.id">
+        <div class="grid-content box box--light box--space-small shadow--hover">
+          <h3>
+            <router-link :to="{ name: 'singleJury', params: { juryId: singleevent.id}}" class="el-col__link">{{singleevent.courseName}}</router-link>
+          </h3>
+          <p class="jury-info">
+            <span class="jury-info__date">
+              <b>debut:</b> {{eventDateStrings(singleevent.start)}}
+            </span>
+            <span class="jury-info__time">
+              <b>heure:</b> {{eventHourString(singleevent.start)}}
+            </span>
+          </p>
         </div>
-        <div class="column control is-4">
-          <label for="projecttitle" class="label">Ponderation</label>
-          <input id="projecttitle" class="input" type="text" v-model.lazy="newproject.pond"  placeholder="Text input">
-        </div>
-        <div class="column control is-3">
-          <button type="button" class="button is-primary" name="button">Ajouter le projet</button>
-        </div>
-        <div class="column control is-12">
-          <label for="projecttitle" class="label">Lien vers le projet</label>
-          <input id="projecttitle" class="input" type="text" v-model.lazy="newproject.linklive"  placeholder="Text input">
-        </div>
-        <div class="column control is-12">
-          <label for="projecttitle" class="label">Lien vers le repo</label>
-          <input id="projecttitle" class="input" type="text" v-model.lazy="newproject.linkrepo"  placeholder="Text input">
-        </div>
-      </div>
+      </el-col>
+    </el-row>
+    <p v-else>L’étudiant ne participe à aucun jury</p>
     </div>
-    <!--END add project for student-->
-    <h3 class="title is-6 has-text-weight-normal">Les projets que cet étudiant doit presenter </h3>
-    <div class="columns is-12">
-      <div class="column is-6">
-      <div class="box columns is-multiline">
-        <div class="field column is-3">
-          <label for="projectname" class="label has-text-weight-normal">Nom du projet</label>
-          <span v-show="!showField('projectname')" @dblclick="focusField('projectname')" class="title is-5">CV</span>
-          <input v-show="showField('projectname')" @focus="focusField('projectname')" @blur="blurField" id="projectname" class="input" @keyup.enter="updateProject" type="text"  placeholder="Text input">
-        </div>
-        <div class="field column is-3">
-          <label for="projectpond" class="label has-text-weight-normal">Ponderation</label>
-          <span v-show="!showField('projectpond')" @dblclick="focusField('projectpond')" class="title is-5">20/100</span>
-          <input v-show="showField('projectpond')" @focus="focusField('projectpond')" @blur="blurField" id="projectpond" class="input" @keyup.enter="updateProject" type="text"  placeholder="Text input">
-        </div>
-        <div class="field column is-3">
-          <button type="button" class="button is-primary" name="button">Supprimer</button>
-        </div>
-        <div class="field column is-12">
-          <label for="projectlink" class="label has-text-weight-normal">Lien vers le projet</label>
-          <p v-show="!showField('projectlink')" @dblclick="focusField('projectlink')" class="title is-5">{{project.linklive}}</p>
-          <input v-show="showField('projectlink')" @focus="focusField('projectlink')" @blur="blurField" id="projectlink" class="input" @keyup.enter="updateProject" type="text"  placeholder="Text input">
-        </div>
-        <div class="field column is-12">
-          <label for="projectgithub" class="label has-text-weight-normal">Lien vers le repo</label>
-          <p v-show="!showField('projectgithub')" @dblclick="focusField('projectgithub')" class="title is-5">{{project.linkrepo}}</p>
-          <input v-show="showField('projectgithub')" @focus="focusField('projectgithub')" @blur="blurField" id="projectgithub" class="input" @keyup.enter="updateProject" type="text"  placeholder="Text input">
-        </div>
-      </div>
-      </div>
-    </div>
-    <!--END student projects-->
-  </div>
+  </el-main>
 </template>
 <script>
-import {mapGetters, mapActions} from 'vuex';
 import Vue from 'vue';
 import { QUERY_SINGLE_STUDENT, CREATE_STUDENT_MUTATION} from '../querys/AllStudents.gql'
 import EventBus from '../event-bus'
@@ -94,10 +55,6 @@ export default {
       },
       student:{
       },
-      project:{
-        linklive:"http://example.com/",
-        linkrepo:"http://example.com/"
-      }
     }
   },
   apollo: {
@@ -114,7 +71,6 @@ export default {
       update(data){
         this.$data.newstudent.email = data.Student['email']
         this.$data.newstudent.name = data.Student['name']
-        console.log(this.$data)
         return data.Student
       }
     },
@@ -138,14 +94,92 @@ export default {
     },
     showField(name){
       return (this.student[name] == '' || this.editfield == name)
+    },
+    eventDateStrings(startingtime) {
+      let thetime = new Date(startingtime);
+      let dateoptions = { year: 'numeric', month: 'short', day: 'numeric' };
+      return thetime.toLocaleDateString('fr-FR', dateoptions);
+    },
+    eventHourString(startingtime){
+      let thetime = new Date(startingtime);
+      let houroptions = { hour: 'numeric', minute: 'numeric' };
+      return thetime.toLocaleTimeString('fr-FR', houroptions);
     }
   }
 }
 </script>
 <style lang="scss" scoped>
-.box-style{
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+.title {
+  text-transform: uppercase;
+  &--top-spaced {
+    margin-top: 10rem;
+  }
+  &--bold {
+    font-weight: bold;
+  }
+}
+.el-form-item {
+  &--bottom {
+    vertical-align: bottom;
+  }
+}
+.el-input__inner {
+  border-top: 0;
+}
+.box {
+  flex: 1;
+  &--light {
+    background-color: white;
+  }
+  &--space {
+    padding: 24px 16px;
+  }
+  &--space-small {
+    padding: 16px;
+  }
+  &--aligned-center {
+    display: flex;
+    align-items: center;
+  }
+}
+.el-row {
+  &--max-big {
+    max-width: 1200px;
+  }
+}
+.el-col {
+  &--space-right-bottom-small{
+    margin-right: 16px;
+    margin-bottom: 16px;
+  }
+  &__link{
+    color: inherit;
+    text-decoration: none;
+  }
+}
+.jury-extra {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  &__item {
+    padding-right: 16px;
+  }
+}
+.el-button-group {
+  &--margin-top-small {
+    margin-top: 2rem;
+  }
+}
+.el-image {
+  margin-right: 16px;
+  border-radius: 100%;
+}
+.shadow--hover{
+  transition: box-shadow .3s ease-in-out;
+  &:hover {
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+  }
 }
 </style>
