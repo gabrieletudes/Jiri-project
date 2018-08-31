@@ -51,8 +51,19 @@
 import { QUERY_ALL_STUDENTS } from '../querys/AllStudents.gql'
 import { QUERY_ALL_USERS } from '../querys/Users.gql'
 import { QUERY_ALL_PROJECTS } from '../querys/Projects.gql'
+// Import components
+import JuryAddDescription from './JuryAddDescription.vue'
+import JuryAddProjects from './JuryAddProjects.vue'
+import JuryAddStudents from './JuryAddStudents.vue'
+import JuryAddMembers from './JuryAddMembers.vue'
 import EventBus from '../event-bus'
 export default {
+  components: {
+    'jury-add-description': JuryAddDescription,
+    'jury-add-projects': JuryAddProjects,
+    'jury-add-students': JuryAddStudents,
+    'jury-add-members': JuryAddMembers
+  },
   data(){
     return{
       academicYear:'2017 - 2018 testing',
