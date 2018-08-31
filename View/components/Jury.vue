@@ -115,37 +115,6 @@ export default {
     }
   },
   methods:{
-    addProjectToArray(){
-      //checks if the memeber is not in the temporary array
-      if(!this.eventprojects.ids.includes(this.theproject.id)){
-        console.log('The project is not added yet')
-        console.log(this.eventprojects);
-        //push the member if it is not in the array
-        this.eventprojects.ids.push(this.theproject.id)
-        this.eventprojects.weights.push(this.theproject.weight)
-      }else{
-        console.log('The project is already here')
-      }
-    },
-    addStudentToArray(){
-      //checks if the student is not in the temporary array
-      if(!this.eventstudents.includes(this.thestudentId)){
-        console.log('The student is not added yet')
-        //push the student if it is not in the array
-        this.eventstudents.push(this.thestudentId)
-      }else{
-        console.log('The student is already here')
-      }
-    },addMemberToArray(){
-      //checks if the memeber is not in the temporary array
-      if(!this.eventmembers.includes(this.thememberId)){
-        console.log('The member is not added yet')
-        //push the member if it is not in the array
-        this.eventmembers.push(this.thememberId)
-      }else{
-        console.log('The member is already here')
-      }
-    },removeElementFromArray(target,element){
       //stocks the index of the element that is in the target array
       let theelementindex = target.indexOf(element);
       //checks if the element exists in the target array
