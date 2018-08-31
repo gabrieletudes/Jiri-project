@@ -91,6 +91,7 @@ export default {
       students:{},
       members:{},
       projects:{}
+      academicYears: []
     }
   },
   apollo: {
@@ -108,6 +109,10 @@ export default {
       update(data){
         return data.allUsers
       }
+  mounted() {
+    //execute createAcademicYears function
+    this.createAcademicYears()
+  },
     },
     projects: {
       // gql query
@@ -182,6 +187,15 @@ export default {
         weights: this.eventprojects.weights
       }
       EventBus.$emit('createEvent',evenement);
+    createAcademicYears(){
+      let currentDate = new Date()
+      let formatedYear = (currentDate.getFullYear() - 1) + " - " + (currentDate.getFullYear())
+      this.academicYears.push(formatedYear)
+      for (var i = 1; i < 4; i++) {
+        let formatedYear = (currentDate.getFullYear() + i-1) + " - " + (currentDate.getFullYear() + i)
+        this.academicYears.push(formatedYear)
+      }
+    },
     next() {
       if (this.active++ > 3) this.active = 1;
       switch (this.active) {
