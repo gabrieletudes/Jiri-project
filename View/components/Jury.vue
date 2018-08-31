@@ -106,27 +106,7 @@ export default {
     this.createAcademicYears()
   },
   methods:{
-      //stocks the index of the element that is in the target array
-      let theelementindex = target.indexOf(element);
-      //checks if the element exists in the target array
-      if(target.includes(element)){
-        //removes the element from the target array
-        target.splice(theelementindex, 1)
-      }else{
-        console.log('The ' + target + ' is not in the array')
-      }
-    },removeProjectFromArray(target,element){
-      //stocks the index of the element that is in the target array
-      let theelementindex = target.ids.indexOf(element);
-      //checks if the element exists in the target array
-      if(target.ids.includes(element)){
-        //removes the element from the target array
-        target.ids.splice(theelementindex, 1)
-        target.scores.splice(theelementindex, 1)
-      }else{
-        console.log('The ' + target + ' is not in the array')
-      }
-    },createEvent(){
+    createEvent(){
       let evenement = {
         academicYear: this.newJury.academicYear,
         courseName: this.newJury.juryname,
