@@ -118,6 +118,7 @@ export default {
         projects: this.newJury.projects
       }
       EventBus.$emit('createEvent',evenement);
+    },
     createAcademicYears(){
       let currentDate = new Date()
       let formatedYear = (currentDate.getFullYear() - 1) + " - " + (currentDate.getFullYear())
@@ -172,16 +173,78 @@ export default {
   }
 }
 </script>
-<style lang="scss" scooped>
-.input-width {
-  width: 4rem;
+<style lang="scss" scoped>
+.el-steps {
+  margin-bottom: 2rem;
 }
-.box-style{
+.jury-create {
   background-color: white;
-  border-radius: 5px;
-  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+  padding: 24px 16px;
 }
-.is-half {
-  width: 50%;
+.title {
+  text-transform: uppercase;
+  &--top-spaced {
+    margin-top: 10rem;
+  }
+  &--centered {
+    text-align: center;
+  }
+  &--bold {
+    font-weight: bold;
+  }
+}
+.el-form-item {
+  &--bottom {
+    vertical-align: bottom;
+  }
+}
+.el-input__inner {
+  border-top: 0;
+}
+.box {
+  flex: 1;
+  &--light {
+    background-color: white;
+  }
+  &--space {
+    padding: 24px 16px;
+  }
+  &--space-small {
+    padding: 16px;
+  }
+}
+.box--spa {
+  background-color: white;
+}
+.el-col {
+  &--max-small {
+    max-width: 320px
+  }
+  &__link {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+  }
+}
+.jury-extra {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  &__item {
+    padding-right: 16px;
+  }
+}
+.shadow--hover {
+  transition: box-shadow .3s ease-in-out;
+  &:hover {
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+  }
+}
+.el-button-group {
+  &--margin-top-small {
+    margin-top: 2rem;
+  }
 }
 </style>
