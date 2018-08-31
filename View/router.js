@@ -9,6 +9,7 @@ import Header from './components/Header.vue'
 import SideMenu from './components/SideMenu.vue'
 import Jury from './components/Jury.vue'
 import Jurys from './components/Jurys.vue'
+import singleJury from './components/singleJury.vue'
 import Login from './components/Login.vue'
 import Students from './components/Students.vue'
 import Student from './components/singleStudent.vue'
@@ -33,6 +34,15 @@ const routes = [
           name: 'jurys',
           components: {
             default: Jurys,
+            'header': Header,
+            'side-menu': SideMenu
+          }
+        },
+        {
+          path: '/jiri/jurys/:juryId',
+          name: 'singleJury',
+          components: {
+            default: singleJury,
             'header': Header,
             'side-menu': SideMenu
           }
