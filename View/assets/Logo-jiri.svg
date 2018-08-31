@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 82 59">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #98c6b2;
+        font-size: 40px;
+        font-family: Roboto-Bold, Roboto;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+
+      .cls-2, .cls-3 {
+        letter-spacing: 0.029em;
+      }
+
+      .cls-3 {
+        fill: #fb6542;
+        font-size: 51px;
+      }
+    </style>
+  </defs>
+  <g id="Group_108" data-name="Group 108" transform="translate(-477 -243)">
+    <g id="text" transform="translate(284 -11)">
+      <text id="JIR:" class="cls-1" transform="translate(193 301)"><tspan x="0" y="0">JI</tspan><tspan class="cls-2" y="0">R</tspan><tspan class="cls-3" y="0">:</tspan></text>
+    </g>
+  </g>
+</svg>
