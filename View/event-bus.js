@@ -77,7 +77,6 @@ EventBus.$on('authenticateUser', user => {
       password: user.pass,
     },
     update: (cache, { data: { authenticateUser } }) => {
-      console.log(authenticateUser);
       localStorage.setItem('userToken', authenticateUser.token);
       router.push({ name: 'jury' })
     }
