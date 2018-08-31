@@ -59,9 +59,13 @@ const routes = [
           }
         },
         {
-          path: 'student/:studentId',
-          component: Student,
-          name:'singleStudent'
+          path: '/jiri/etudiants/:studentId',
+          name:'singleStudent',
+          components: {
+            default: Student,
+            'header': Header,
+            'side-menu': SideMenu
+          }
         },
         {
           path: '/jiri/members',
