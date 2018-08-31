@@ -1,128 +1,51 @@
 <template>
-  <div class="container">
-    <h1 class="title has-text-centered is-bold">Bonjour Dominique</h1>
-    <!--Starts Project add step-->
-    <div class="content">
-      <h2>Quels sont les projets de ce jury ?</h2>
-      <div class="column columns box is-7">
-        <div class="field column is-4">
-          <label class="label">Projet</label>
-          <div class="select control">
-            <select name="projectsforevent" id="projectsforevent" v-model="theproject.id">
-              <option :disabled="eventprojects.ids.includes(project.id)" v-for="project in projects" :key="project.id" :value="project.id">{{project.name}}</option>
-            </select>
-          </div>
+  <el-main>
+    <h1 class="title title--centered title--bold title--top-spaced">Souhaitez vous organizer un nouveau jury?</h1>
+    <!--Starts Jury add step-->
+    <el-steps :active="active" align-center finish-status="success">
+      <el-step title="Description du jury"></el-step>
+      <el-step title="Projets du jury"></el-step>
+      <el-step title="Etudiants participants"></el-step>
+      <el-step title="Membres participants"></el-step>
+    </el-steps>
+    <component v-if="active < 4" :is="currentComponent" :newJury="newJury" :academicYears="academicYears" :formInline="formInline"></component>
+    <p v-else class="el-icon-circle-check-outline">Le jury a etait crée</p>
+    <el-button-group class="el-button-group--margin-top-small">
+      <el-button v-if="active > 0 && active < 3" type="primary" icon="el-icon-arrow-left" @click="previous">{{buttontitle.titles[active-1]}}</el-button>
+      <el-button v-if="active < 3" type="primary" @click="next">{{buttontitle.titles[active+1]}}<i class="el-icon-arrow-right el-icon-right"></i></el-button>
+      <el-button v-if="active === 3" type="primary" @click="createEvent">{{buttontitle.titles[active+1]}}</el-button>
+    </el-button-group>
+    <!--End Jury add step-->
+    <div v-show="active == 0">
+    <h2>Les jurys en cours ou a venir</h2>
+    <el-row type="flex" :gutter="20">
+      <el-col :span="8" class="el-col--max-small" v-for="singleevent in juryevents" :key="singleevent.id">
+        <div class="grid-content box box--light box--space-small shadow--hover">
+          <h3><router-link :to="{ name: 'singleJury', params: { juryId: singleevent.id}}" class="grid-content el-col__link">{{singleevent.courseName}}</router-link></h3>
+          <p class="jury-info">
+            <span class="jury-info__date">
+              <b>date:</b> {{eventDateStrings(singleevent.start)}}
+            </span>
+            <span class="jury-info__time">
+              <b>heure:</b> {{eventHourString(singleevent.start)}}
+            </span>
+          </p>
+          <ul class="jury-extra">
+            <li class="jury-extra__item">
+              {{singleevent.students.length}} étudiants
+            </li>
+            <li class="jury-extra__item">
+              {{singleevent.jurys.length}} membres
+            </li>
+            <li class="jury-extra__item">
+              {{singleevent.projects.length}} projets
+            </li>
+          </ul>
         </div>
-        <div class="field column is-3">
-          <label class="label">Ponderation</label>
-          <div class="crontrol">
-            <input class="input input-width" v-model="theproject.weight" type="number">
-          </div>
-        </div>
-        <div class="field column">
-          <div class="control">
-            <button type="button" class="button is-primary" @click="addProjectToArray">Ajouter le projet</button>
-          </div>
-        </div>
-      </div>
+      </el-col>
+    </el-row>
     </div>
-    <div v-show="projects">
-      <h2 class="subtitle">Les projets de cet événement</h2>
-      <div class="columns is-multiline">
-        <div v-show="eventprojects.ids.includes(project.id)" class="column is-4" :key="project.id" v-for="(project, index, key) in projects">
-          <div class="box column">
-            <article class="media">
-              <div class="media-content">
-                <span class="label">Projet</span>
-                <div class="content" :key="project.id">{{project.name}}</div>
-              </div>
-              <div class="media-right">
-                <button class="button is-danger" type="button" @click="removeProjectFromArray(eventprojects,project.id)">Supprimer</button>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--End Projects add step-->
-    <!--Start Members add step-->
-    <div class="content">
-      <h2>Selectionnez les membres participants</h2>
-      <div class="field has-addons">
-        <div class="select control">
-          <select name="membersforevent" id="membersforevent" v-model="thememberId">
-            <option :disabled="eventmembers.includes(member.id)" v-for="member in members" :key="member.id" :value="member.id">{{member.name}}</option>
-          </select>
-        </div>
-        <div class="constrol">
-          <button type="button" class="button is-primary" @click="addMemberToArray">Ajouter le membre</button>
-        </div>
-      </div>
-    </div>
-    <div v-show="members">
-      <h2 class="subtitle">Les membres participants</h2>
-      <div class="columns is-multiline">
-        <div v-show="eventmembers.includes(member.id)" class="column is-4" :key="member.id" v-for="(member, index, key) in members">
-          <div class="box column">
-            <article class="media">
-              <figure class="media-left">
-                <p class="image is-64x64">
-                  <img src="https://bulma.io/images/placeholders/128x128.png">
-                </p>
-              </figure>
-              <div class="media-content">
-                <div class="content" :key="member.id">{{member.name}}</div>
-              </div>
-              <div class="media-right">
-                <button class="button is-danger" type="button" @click="removeElementFromArray(eventmembers,member.id)">Supprimer</button>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--End Members add step-->
-    <!--Starts Student add step-->
-    <div class="content">
-      <h2>Selectionnez les étudiants participants</h2>
-      <div class="field has-addons">
-        <div class="select control">
-          <select name="studentsforevent" id="studentsforevent" v-model="thestudentId">
-            <option :disabled="eventstudents.includes(student.id)" v-for="student in students" :key="student.id" :value="student.id">{{student.name}}</option>
-          </select>
-        </div>
-        <div class="constrol">
-          <button type="button" class="button is-primary" @click="addStudentToArray">Ajouter l’étudiant</button>
-        </div>
-      </div>
-    </div>
-    <div v-show="students">
-      <h2 class="subtitle">Les étudiants à juger</h2>
-      <div class="columns is-multiline">
-        <div v-show="eventstudents.includes(student.id)" class="column is-4" :key="student.id" v-for="(student, index, key) in students">
-          <div class="box column">
-            <article class="media">
-              <figure class="media-left">
-                <p class="image is-64x64">
-                  <img src="https://bulma.io/images/placeholders/128x128.png">
-                </p>
-              </figure>
-              <div class="media-content">
-                <div class="content" :key="student.id">{{student.name}}</div>
-              </div>
-              <div class="media-right">
-                <button class="button is-danger" type="button" @click="removeElementFromArray(eventstudents,student.id)">Supprimer</button>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--End Student add step-->
-    <div class="field">
-      <button class="button is-primary" @click="createEvent">Creer l'événement</button>
-    </div>
-  </div>
+  </el-main>
 </template>
 <script>
 import { QUERY_ALL_STUDENTS } from '../querys/AllStudents.gql'
