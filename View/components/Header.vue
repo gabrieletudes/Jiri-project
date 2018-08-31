@@ -1,5 +1,5 @@
 <template>
-  <el-header class="menu-wrapper">
+  <el-header class="menu-wrapper no-padding">
     <el-menu mode="horizontal" @select="handleSelect">
       <el-menu-item index="1" class="logo"><a href="#"><img src="/dist/assets/Logo-jiri.svg" width="auto" height="54"><span class="hide-visually">Jiri</span></a></el-menu-item>
       <el-menu-item index="2" class="no-padding"><a href="#">Admin</a></el-menu-item>
