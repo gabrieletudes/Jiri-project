@@ -36,7 +36,7 @@ EventBus.$on('createStudent', student => {
   });
 });
 
-EventBus.$on('updateStudent', student =>{
+EventBus.$on('updateStudent', student => {
   const { studentId, name, email, softDelete } = student;
   apolloClient.mutate({
     mutation: UPDATE_SINGLE_STUDENT,
