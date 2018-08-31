@@ -112,11 +112,12 @@ query allEvents{
 }`;
 
 export const CREATE_EVENT_MUTATION = gql`
-mutation createEvent($academicYear: String!, $courseName: String!, $softDelete: Boolean!, $authorId: ID!, $jurysIds: [ID!], $studentsIds: [ID!], $projectsIds: [ID!]){
+mutation createEvent($academicYear: String!, $courseName: String!, $softDelete: Boolean!, $eventStart: DateTime! $authorId: ID!, $jurysIds: [ID!], $studentsIds: [ID!], $projectsIds: [ID!]){
    createEvent(
      academicYear: $academicYear
      courseName: $courseName
      softDelete: $softDelete
+     start: $eventStart
      authorId: $authorId
      jurysIds: $jurysIds
      studentsIds: $studentsIds
