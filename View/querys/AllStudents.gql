@@ -33,11 +33,12 @@ query singleStudent($studentId: ID!) {
     }`;
 
     export const UPDATE_SINGLE_STUDENT = gql `
-    mutation updateStudent($studentId: ID!, $name: String!, $email: String!) {
-      updateStudent(id: $studentId, name: $name, email: $email) {
+    mutation updateStudent($studentId: ID!, $name: String!, $email: String!, $group: String!) {
+      updateStudent(id: $studentId, name: $name, email: $email, group: $group) {
         id
         name
         email
+        group
       }
       }`;
 
