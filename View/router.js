@@ -68,9 +68,14 @@ const routes = [
           }
         },
         {
-          path: '/jiri/members',
-          component: Members,
-          name: 'members'
+          path: '/jiri/membres',
+          name: 'members',
+          components: {
+            default: Members,
+            'header': Header,
+            'side-menu': SideMenu
+          }
+        },
         {
           path: '/jiri/membres/:memberId',
           name:'singleMember',
