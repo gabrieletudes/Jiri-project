@@ -168,15 +168,14 @@ export default {
       }
     },createEvent(){
       let evenement = {
-        academicYear: this.academicYear,
-        courseName: this.juryname,
-        softDelete: this.softDelete,
+        academicYear: this.newJury.academicYear,
+        courseName: this.newJury.juryname,
+        eventStart: this.newJury.start,
+        softDelete: this.newJury.softDelete,
         authorId: this.$store.state.theuserId,
-        jurysIds: this.eventmembers,
-        studentsIds: this.eventstudents,
-        //only for the implementation
-        projectsIds: this.eventprojects.ids,
-        weights: this.eventprojects.weights
+        jurysIds: this.newJury.members.map(member => member.id),
+        studentsIds: this.newJury.students.map(student => student.id),
+        projects: this.newJury.projects
       }
       EventBus.$emit('createEvent',evenement);
     createAcademicYears(){
