@@ -42,9 +42,4 @@ export default {
 .no-padding {
   padding: 0;
 }
-
-/*.el-header {
-  background-color: white;
-  height: auto !important;
-}*/
 </style>
