@@ -86,6 +86,31 @@ query AllEvents{
   }
 }`;
 
+export const QUERY_FEW_EVENTS = gql`
+query allEvents{
+  allEvents (orderBy: start_ASC, last:3){
+    id
+    courseName
+    start
+    author{
+      id
+      name
+    }
+    students{
+      id
+      name
+    }
+    projects{
+      id
+      name
+    }
+    jurys{
+      id
+      name
+    }
+  }
+}`;
+
 export const CREATE_EVENT_MUTATION = gql`
 mutation createEvent($academicYear: String!, $courseName: String!, $softDelete: Boolean!, $authorId: ID!, $jurysIds: [ID!], $studentsIds: [ID!], $projectsIds: [ID!]){
    createEvent(
