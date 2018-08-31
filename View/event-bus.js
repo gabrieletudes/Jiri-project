@@ -9,6 +9,8 @@ import {AUTHENTICATE_USER} from './querys/Users.gql'
 import {CREATE_USER_MUTATION, AUTHENTICATE_USER} from './querys/Users.gql'
 //Event Querys
 import {CREATE_EVENT_MUTATION} from './querys/Events.gql'
+//Implementation Querys
+import {CREATE_IMPLEMENTATION_MUTATION} from './querys/Implementations.gql'
 //Router
 import router from './router'
 
@@ -102,25 +104,36 @@ EventBus.$on('createEvent', evenement =>{
       studentsIds: evenement.studentsIds
     },
     update: (cache, { data: { createEvent } }) => {
-      console.log('Event Created')
-      //const data = proxy.readQuery({ query: TodoAppQuery })
-      console.log(createEvent)
-      console.log(evenement)
-      /*evenement.studentsIds.fetch(
-      console.log()
-    )*/
+      evenement.studentsIds.forEach( function(studentid) {
+        projectsIds.forEach( function(projectid) {
+          let projectId = projectid,
+          studentId = studentid,
+          softDelete = false,
+          eventId = createEvent.id,
+          weight;
 
-    evenement.studentsIds.forEach( function(s) {
-      console.log(s)
-      evenement.projectsIds.forEach( function(p) {
-        console.log(p)
-        //console.log()
-        console.log(evenement.projectsIds.indexOf(p))
-        let projectindex = evenement.projectsIds.indexOf(p);
-        let weightindex = evenement.weights[projectindex]
-        console.log(evenement.weights[projectindex])
-      } )
-    } )
-  }
-})
+          evenement.projects.forEach( function(project) {
+            if(project.id === projectid){
+              weight = parseFloat(project.weight);
+            }
+          });
+
+          apolloClient.mutate({
+            mutation: CREATE_IMPLEMENTATION_MUTATION,
+            variables: {
+              softDelete,
+              eventId,
+              projectId,
+              studentId,
+              weight,
+            },
+            update: (cache, { data: { createImplementation } }) => {
+              apolloClient.resetStore()
+            }
+          });
+        })
+      })
+    }
+  })
 });
+//End for Events
