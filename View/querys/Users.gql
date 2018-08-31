@@ -7,7 +7,12 @@ query singleUser($userId: ID!) {
     email,
     name,
     softDelete
-    company
+    company,
+    juryEvents {
+      id,
+      courseName,
+      start
+    }
   }
   }`;
 
