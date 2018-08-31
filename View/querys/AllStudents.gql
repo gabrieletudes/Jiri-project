@@ -42,11 +42,14 @@ query singleStudent($studentId: ID!) {
       }
       }`;
 
-      export const CREATE_STUDENT_MUTATION = gql `
-      mutation createStudent($email: String!, $name: String!, $softDelete: Boolean!) {
-        createStudent(name: $name, email: $email, softDelete: $softDelete) {
+    export const CREATE_STUDENT_MUTATION = gql `
+    mutation createStudent($email: String!, $name: String!, $softDelete: Boolean!, $groupId: ID!) {
+      createStudent(name: $name, email: $email, softDelete: $softDelete, groupId: $groupId) {
+        id
+        name
+        email
+        group{
           id
-          name
-          email
         }
+      }
       }`;
