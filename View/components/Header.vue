@@ -28,6 +28,10 @@ export default {
 <style lang="scss" scoped>
 .el-header {
   background-color: white;
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 10;
 }
 .el-menu {
   display: flex;
