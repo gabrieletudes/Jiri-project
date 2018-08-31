@@ -1,27 +1,10 @@
 <template>
-  <div>
-  <nav class="navbar is-link">
-  <div class="navbar-brand">
-    <router-link class="navbar-item" :to="{name:'jury'}">Jiri</router-link>
-    <div class="navbar-burger burger" data-target="navMenuColorlink-example">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </div>
-  <div id="navMenuColorlink-example" class="navbar-menu">
-    <div class="navbar-start">
-      <router-link  class="navbar-item" :to="{name:'students'}">Students</router-link>
-      <router-link  class="navbar-item" :to="{name:'members'}">Members</router-link>
-    </div>
-    <div class="navbar-end">
-      <div class="navbar-item">
-          <div class="button is-primary" @click="logout()">logout</div>
-      </div>
-    </div>
-  </div>
-</nav>
-</div>
+  <el-header class="menu-wrapper no-padding">
+    <el-menu mode="horizontal" @select="handleSelect">
+      <el-menu-item index="1" class="logo"><a href="#"><img src="/dist/assets/Logo-jiri.svg" width="auto" height="54"><span class="hide-visually">Jiri</span></a></el-menu-item>
+      <el-menu-item index="2" class="no-padding" @click="logout()">Se deconnecter</el-menu-item>
+    </el-menu>
+  </el-header>
 </template>
 <script>
 export default {
@@ -29,16 +12,38 @@ export default {
   computed: {
     userId () {
       return this.$root.$data.userId
-
     }
   },
   methods: {
     logout () {
       localStorage.removeItem('userToken')
       this.$router.push({name: 'login'})
+    },
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
     }
   }
 }
 </script>
 <style lang="scss" scoped>
+.el-header {
+  background-color: white;
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+.el-menu {
+  display: flex;
+  justify-content: flex-end;
+  max-width: 1500px;
+}
+
+.logo.el-menu-item {
+  margin: 0 auto;
+}
+
+.no-padding {
+  padding: 0;
+}
 </style>

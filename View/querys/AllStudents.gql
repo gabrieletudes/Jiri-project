@@ -6,7 +6,16 @@ query singleStudent($studentId: ID!) {
     id,
     email,
     name,
-    softDelete
+    softDelete,
+    group{
+      id
+      name
+    },
+    studentEvents {
+      id,
+      courseName,
+      start
+    }
   }
   }`;
 
@@ -16,23 +25,31 @@ query singleStudent($studentId: ID!) {
       id
       name
       email
+      group {
+        id
+        name
+      }
     }
     }`;
 
     export const UPDATE_SINGLE_STUDENT = gql `
-    mutation updateStudent($studentId: ID!, $name: String!, $email: String!) {
-      updateStudent(id: $studentId, name: $name, email: $email) {
+    mutation updateStudent($studentId: ID!, $name: String!, $email: String!, $group: String!) {
+      updateStudent(id: $studentId, name: $name, email: $email, group: $group) {
         id
         name
         email
+        group
       }
       }`;
 
-      export const CREATE_STUDENT_MUTATION = gql `
-      mutation createStudent($email: String!, $name: String!, $softDelete: Boolean!) {
-        createStudent(name: $name, email: $email, softDelete: $softDelete) {
+    export const CREATE_STUDENT_MUTATION = gql `
+    mutation createStudent($email: String!, $name: String!, $softDelete: Boolean!, $groupId: ID!) {
+      createStudent(name: $name, email: $email, softDelete: $softDelete, groupId: $groupId) {
+        id
+        name
+        email
+        group{
           id
-          name
-          email
         }
+      }
       }`;

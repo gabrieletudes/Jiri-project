@@ -1,4 +1,4 @@
-# The following types define the data model of the example service
+# The following types define the data model of the Jiri service
 # based on which the GraphQL API is generated
 
 type User @model{
@@ -22,7 +22,15 @@ type Student @model{
   implementations: [Implementation!]! @relation(name: "ImplementationsForStudent")
   meetings: [Meeting!]! @relation(name: "MeetingsForStudent")
   studentEvents: [Event!]! @relation(name: "EventsForStudent")
-  performance: Performance @relation(name: "PerformancesForStudent")
+  performances: [Performance!]! @relation(name: "PerformancesForStudent")
+  group: Group! @relation(name: "GroupForStudent")
+}
+
+type Group @model{
+  id: ID! @isUnique
+  name: String!
+  softDelete: Boolean!
+  students: [Student!]! @relation(name: "GroupForStudent")
 }
 
 type Event @model{
@@ -30,6 +38,7 @@ type Event @model{
   softDelete: Boolean!
   courseName: String!
   academicYear: String!
+  start: DateTime!
   author: User! @relation(name: "EventsForUser")
   jurys: [User!]! @relation(name: "JurysForUser")
   meetings: [Meeting!]! @relation(name: "MeetingsForEvent")
@@ -43,6 +52,7 @@ type Meeting @model{
   id: ID! @isUnique
   softDelete: Boolean!
   evaluation: Float
+  comment: String
   author: User! @relation(name: "MeetingsForUser")
   student: Student! @relation(name: "MeetingsForStudent")
   event: Event! @relation(name: "MeetingsForEvent")
@@ -86,15 +96,5 @@ type Project @model{
   description: String!
   events: [Event!]! @relation(name: "ProjectsForEvent")
   implemantations: [Implementation!]! @relation(name: "ImplementationsForProject")
+  weight: Float!
 }
-
-
-# Uncomment the model below as well
-
-# type Post @model {
-#   id: ID! @isUnique
-#   title: String!
-#
-#   # Every relation also required a back-relation (to determine 1:1, 1:n or n:m)
-#   author: User! @relation(name: "UserPosts")
-# }

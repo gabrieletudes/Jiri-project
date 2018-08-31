@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export const CREATE_IMPLEMENTATION_MUTATION = gql `
-mutation createImplementation($eventId: ID, projectId: ID, $weight: Float!, $studentId: ID, $softDelete: Boolean!){
+mutation createImplementation($eventId: ID!, $projectId: ID!, $weight: Float!, $studentId: ID!, $softDelete: Boolean!){
  createImplementation(
      eventId: $eventId
      projectId: $projectId
@@ -19,5 +19,4 @@ mutation createImplementation($eventId: ID, projectId: ID, $weight: Float!, $stu
      description
    }
  }
-}
-};
+}`;
