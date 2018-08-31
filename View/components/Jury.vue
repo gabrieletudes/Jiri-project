@@ -10,7 +10,7 @@
     </el-steps>
     <component v-if="active < 4" :is="currentComponent" :newJury="newJury" :academicYears="academicYears" :formInline="formInline"></component>
     <p v-else class="el-icon-circle-check-outline">Le jury a etait crée</p>
-    <el-button-group class="el-button-group--margin-top-small">
+    <el-button-group class="el-button-group--margin-top-small el-space--bottom-medium ">
       <el-button v-if="active > 0 && active < 3" type="primary" icon="el-icon-arrow-left" @click="previous">{{buttontitle.titles[active-1]}}</el-button>
       <el-button v-if="active < 3" type="primary" @click="next">{{buttontitle.titles[active+1]}}<i class="el-icon-arrow-right el-icon-right"></i></el-button>
       <el-button v-if="active === 3" type="primary" @click="createEvent">{{buttontitle.titles[active+1]}}</el-button>
@@ -245,6 +245,11 @@ export default {
 .el-button-group {
   &--margin-top-small {
     margin-top: 2rem;
+  }
+}
+.el-space {
+  &--bottom-medium {
+    margin-bottom: 32px;
   }
 }
 </style>
