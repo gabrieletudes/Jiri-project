@@ -69,12 +69,11 @@ export default {
         softDelete: this.newmember.softDelete
       }
 
-      console.log(user)
       EventBus.$emit('createUser',user);
       this.newmember = {
         name: null,
         email: null,
-        password: '12345',
+        password: null,
         isAdmin: false,
         softDelete: false
       }
