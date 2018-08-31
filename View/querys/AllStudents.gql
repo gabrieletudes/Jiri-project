@@ -6,7 +6,16 @@ query singleStudent($studentId: ID!) {
     id,
     email,
     name,
-    softDelete
+    softDelete,
+    group{
+      id
+      name
+    },
+    studentEvents {
+      id,
+      courseName,
+      start
+    }
   }
   }`;
 
@@ -16,6 +25,10 @@ query singleStudent($studentId: ID!) {
       id
       name
       email
+      group {
+        id
+        name
+      }
     }
     }`;
 
