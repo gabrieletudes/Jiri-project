@@ -105,15 +105,6 @@ export default {
     //execute createAcademicYears function
     this.createAcademicYears()
   },
-    },
-    projects: {
-      // gql query
-      query: QUERY_ALL_PROJECTS,
-      update(data){
-        return data.allProjects
-      }
-    }
-  },
   methods:{
       //stocks the index of the element that is in the target array
       let theelementindex = target.indexOf(element);
