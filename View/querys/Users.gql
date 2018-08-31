@@ -49,18 +49,15 @@ query loggedInUser {
   }`;
 
 export const CREATE_USER_MUTATION = gql `
-mutation signupUser($name:String!, $email: String!, $password:String!, $company: String, $isAdmin: Boolean!, $softDelete: Boolean!) {
-  createUser(
+mutation signupUser($name:String!, $email: String!, $password:String!, $isAdmin: Boolean!, $softDelete: Boolean!) {
+  signupUser(
     name:$name,
     email:$email,
-    password:$password, 
-    company:$company,
+    password:$password,
     isAdmin:$isAdmin,
     softDelete: $softDelete)
     {
     id
-    name
-    email
-    password
+    token
   }
   }`;
