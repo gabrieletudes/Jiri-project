@@ -23,7 +23,7 @@ type Student @model{
   meetings: [Meeting!]! @relation(name: "MeetingsForStudent")
   studentEvents: [Event!]! @relation(name: "EventsForStudent")
   performances: [Performance!]! @relation(name: "PerformancesForStudent")
-  group: Group @relation(name: "GroupForStudent")
+  group: Group! @relation(name: "GroupForStudent")
 }
 
 type Group @model{
