@@ -34,8 +34,8 @@ query singleEvent($eventId: ID!){
   }`;
 
 export const QUERY_ALL_EVENTS = gql`
-query AllEvents{
-  allEvents (orderBy: start_DESC){
+query AllEvents($authorId: ID!){
+  allEvents (orderBy: start_DESC, filter: { author: {id: $authorId}}){
     id
     academicYear
     author {
@@ -87,8 +87,13 @@ query AllEvents{
 }`;
 
 export const QUERY_FEW_EVENTS = gql`
-query allEvents{
-  allEvents (orderBy: start_ASC, last:3){
+query allEvents($authorId: ID!){
+  allEvents (orderBy: start_ASC, last:3,
+    filter: {
+      author: {
+        id: $authorId
+        }
+    }){
     id
     courseName
     start
