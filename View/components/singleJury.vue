@@ -1,6 +1,7 @@
 <template>
   <el-main>
     <h1 class="title title--centered title--bold title--top-spaced">{{juryevent.courseName}} {{juryevent.academicYear}}</h1>
+    <router-link :to="{ name: 'memberJury', params: { memberId: 'cjb8gty8z7m3a0101xoys38o8'}}">Jury du membre</router-link>
     <div>
       <h2>Les etudiants participants</h2>
       <el-row class="el-row--max-big">
