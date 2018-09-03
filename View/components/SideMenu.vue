@@ -27,7 +27,7 @@ export default {
 <style lang="scss" scoped>
 .aside {
   max-width: 200px;
-  background-color: white;
+  background-color: #398089;
   &__menu {
     border-right: none;
     margin-top: 60px;
@@ -37,30 +37,34 @@ export default {
   }
 }
 .el-menu {
+  background-color: inherit;
   &--horizontal {
     padding: 0 20px;
   }
 }
 .el-menu-item {
   padding: 0 !important;
+  color: #FFFFFF;
   &.is-active{
-    color:inherit;
+    color:none;
   }
   &__link {
     padding: 0 20px;
     color: inherit;
     text-decoration: none;
     display: block;
+    font-weight: bold;
+    transition: background-color .3s ease-in-out;
     &:active, &:hover, &:focus {
-      color: #409EFF;
-      background-color: #ecf5ff;
+      color: #3e3e3e;
+      background-color: #FFCCBC;
       text-decoration: none;
     }
   }
-}
-.el-menu-item__link.router-link-active {
-  color: #409EFF;
-  background-color: #ecf5ff;
-  text-decoration: none;
+  &__link.router-link-active, &:focus, &:hover {
+    color: #3e3e3e;
+    background-color: #FFCCBC;
+    text-decoration: none;
+  }
 }
 </style>
