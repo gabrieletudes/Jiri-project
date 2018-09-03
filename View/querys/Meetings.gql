@@ -1,0 +1,111 @@
+
+import gql from 'graphql-tag'
+
+export const QUERY_SINGLE_MEETINGS = gql`
+query singleMeeting($meetingId: ID!){
+  Meeting(id: $meetingId){
+    id
+    event{
+      id
+      courseName
+      }
+      author{
+        id
+        name
+      }
+      student{
+        id
+        name
+        }
+      }
+  		allImplementations{
+        id
+    }
+    }`
+
+export const QUERY_MEETINGS = gql`
+query Meetings{
+  allMeetings{
+    id
+    event{
+      id
+      courseName
+      }
+      author{
+        id
+        name
+      }
+      student{
+        id
+        name
+        }
+      }
+    }`
+
+export const CREATE_MEETING_MUTATION = gql`
+mutation createMeeting($softDelete: Boolean!, $authorId: ID!, $eventId: ID!, $studentId: ID!, $scoreDelete: Boolean!, $comment: String!, $score: Float!, $implementationId: ID!){
+  createMeeting(
+    softDelete: $softDelete
+ 		authorId: $authorId
+    eventId: $eventId
+    studentId: $studentId
+    scores: {
+      softDelete: $scoreDelete
+      comment: $comment
+      score: $score
+      implementationId: $implementationId
+    }
+  ){
+    softDelete
+ 		author {
+      name
+    }
+    event {
+      courseName
+    }
+    student{name}
+    scores {
+      implementation {
+        scores{
+          score
+          comment
+        }
+        project{
+          name
+          description
+        }
+      }
+    }
+  }
+}`;
+
+export const CREATE_SINGLE_MEETING_MUTATION = gql`
+mutation createSingleMeeting($softDelete: Boolean!, $authorId: ID!, $eventId: ID!, $studentId: ID!){
+  createMeeting(
+    softDelete: $softDelete
+ 		authorId: $authorId
+    eventId: $eventId
+    studentId: $studentId
+  ){
+    softDelete
+ 		author {
+      name
+    }
+    event {
+      courseName
+    }
+    student{name}
+    scores {
+      implementation {
+        scores{
+          score
+          comment
+        }
+        project{
+          name
+          description
+        }
+      }
+    }
+  }
+}`;
