@@ -10,6 +10,8 @@ import {CREATE_USER_MUTATION, AUTHENTICATE_USER} from './querys/Users.gql'
 import {CREATE_EVENT_MUTATION} from './querys/Events.gql'
 //Implementation Querys
 import {CREATE_IMPLEMENTATION_MUTATION} from './querys/Implementations.gql'
+//Meetings Querys
+import {CREATE_MEETING_MUTATION} from './querys/Meetings.gql'
 //Router
 import router from './router'
 
@@ -133,3 +135,25 @@ EventBus.$on('createEvent', evenement => {
   })
 });
 //End for Events
+//Start Meeting
+EventBus.$on('createMeeting', meeting => {
+  const { authorId, eventId, studentId, newmeeting } = meeting;
+  newmeeting.forEach( function(meeting) {
+    apolloClient.mutate({
+      mutation: CREATE_MEETING_MUTATION,
+      variables: {
+        softDelete: meeting.softDelete,
+        authorId: authorId,
+        eventId: eventId,
+        studentId: studentId,
+        scoreDelete: meeting.scores.softDelete,
+        comment: meeting.scores.comment,
+        score: parseFloat(meeting.scores.score),
+        implementationId: meeting.scores.implementationId
+      },
+      update: (cache, {data:{createMeeting}}) => {
+        apolloClient.resetStore()
+      }
+    });
+  });
+});
