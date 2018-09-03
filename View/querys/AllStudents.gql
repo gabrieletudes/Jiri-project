@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export const QUERY_SINGLE_STUDENT = gql `
-query singleStudent($studentId: ID!) {
+query singleStudent($studentId: ID!, $authorId: ID!) {
   Student(id: $studentId) {
     id,
     email,
@@ -11,13 +11,53 @@ query singleStudent($studentId: ID!) {
       id
       name
     },
-    studentEvents {
+    studentEvents(
+      filter:{
+        author:{
+      		id: $authorId
+        }
+    	}) {
       id,
       courseName,
       start
     }
   }
   }`;
+
+  export const QUERY_MEMBER_STUDENT = gql`
+  query memberStudent($thestudentId: ID!, $theauthorId: ID!) {
+    Student(id: $thestudentId){
+      id
+      name
+      group{
+        id
+        name
+      }
+      implementations {
+        id
+        weight
+        urlRepo
+        urlProject
+        project {
+          id
+          name
+        }
+        scores(
+          filter:{
+            meeting:{
+              author:{
+                id: $theauthorId
+              }
+            }
+          }
+          ){
+            id
+            score
+            comment
+          }
+        }
+      }
+      }`;
 
   export const QUERY_ALL_STUDENTS = gql `
   query allStudents {

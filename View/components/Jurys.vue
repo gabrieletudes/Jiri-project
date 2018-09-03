@@ -1,10 +1,10 @@
 <template>
   <el-main>
-    <h1 class="title title--centered title--bold title--top-spaced">Jurys</h1>
+    <h1 class="title title--bold title--top-spaced">Jurys</h1>
     <div>
       <h2>Les récents et passés jurys</h2>
       <el-row class="el-row--flex el-row--max-big">
-        <el-col :span="8" :xs="25" :sm="12" class="el-col--max-small el-col--space-right-bottom-small box box--light box--space-small shadow--hover" v-for="singleevent in juryevents" :key="singleevent.id">
+        <el-col v-if="juryevents" :span="8" :xs="25" :sm="12" class="el-col--max-small el-col--space-right-bottom-small box box--light box--space-small shadow--hover" v-for="singleevent in juryevents" :key="singleevent.id">
           <h3><router-link :to="{ name: 'singleJury', params: { juryId: singleevent.id}}" class="grid-content el-col__link">{{singleevent.courseName}}</router-link></h3>
           <p class="jury-info">
             <span class="jury-info__date">
@@ -38,6 +38,7 @@ import EventBus from '../event-bus'
 export default {
   data(){
     return{
+      authorId: this.$store.state.theuserId,
       juryevents:[]
     }
   },
@@ -46,6 +47,12 @@ export default {
     juryevents: {
       // gql query
       query: QUERY_ALL_EVENTS,
+      variables() {
+        // Use vue reactive properties here
+        return {
+          authorId: this.authorId,
+        }
+      },
       update(data){
         return data.allEvents
       }

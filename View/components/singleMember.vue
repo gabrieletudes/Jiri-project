@@ -41,6 +41,7 @@ import EventBus from '../event-bus'
 export default {
   data(){
     return{
+      authorId: this.$store.state.theuserId,
       memberId: this.$route.params.memberId,
       editfield: false,
       newmember:{
@@ -58,6 +59,7 @@ export default {
         // Use vue reactive properties here
         return {
           userId: this.memberId,
+          authorId: this.authorId,
         }
       },
       update(data){

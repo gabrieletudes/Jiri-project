@@ -1,17 +1,10 @@
 <template>
   <el-main>
     <h1 class="title title--centered title--bold title--top-spaced">{{juryevent.courseName}} {{juryevent.academicYear}}</h1>
-    <router-link :to="{ name: 'memberJury', params: { memberId: 'cjb8gty8z7m3a0101xoys38o8'}}">Jury du membre</router-link>
     <div>
-      <h2>Les etudiants participants</h2>
+      <h2>Les etudiants que vous devez evaluer</h2>
       <el-row class="el-row--max-big">
         <jury-students-list :students="juryevent.students"></jury-students-list>
-      </el-row>
-    </div>
-    <div>
-      <h2>Les membres participants</h2>
-      <el-row class="el-row--max-big">
-        <members-list :members="juryevent.jurys"></members-list>
       </el-row>
     </div>
     <div>
@@ -25,16 +18,15 @@
 <script>
 // Import components
 import juryStudentsList from './partials/juryStudentsList.vue'
-import MembersList from './partials/MembersList.vue'
-import ProjectsList from './partials/ProjectsList.vue'
+import ProjectsList from './../partials/ProjectsList.vue'
 // Import Querys
-import { QUERY_SINGLE_EVENT } from '../querys/Events.gql'
+import { QUERY_SINGLE_EVENT } from '../../querys/Events.gql'
 // Import EventBus
-import EventBus from '../event-bus'
+import EventBus from '../../event-bus'
 export default {
+  name: 'memberJury',
   components: {
     'jury-students-list': juryStudentsList,
-    'members-list': MembersList,
     'projects-list': ProjectsList
   },
   data(){

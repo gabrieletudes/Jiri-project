@@ -1,20 +1,25 @@
 import gql from 'graphql-tag'
 
 export const QUERY_SINGLE_USER = gql`
-query singleUser($userId: ID!) {
+query singleUser($userId: ID!, $authorId: ID!) {
   User(id: $userId) {
     id,
     email,
     name,
     softDelete
     company,
-    juryEvents {
-      id,
-      courseName,
-      start
-    }
-  }
-  }`;
+    juryEvents(
+      filter: {
+        author: {
+          id: $authorId
+        }
+        }){
+          id,
+          courseName,
+          start
+        }
+      }
+      }`;
 
 export const QUERY_ALL_USERS = gql `
 query allUsers {

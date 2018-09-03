@@ -15,6 +15,8 @@ import Students from './components/Students.vue'
 import Student from './components/singleStudent.vue'
 import Members from './components/Members.vue'
 import Member from './components/singleMember'
+import memberJury from './components/member/memberJury'
+import memberStudent from './components/member/memberStudent'
 import Projects from './components/Projects.vue'
 
 //Import querys
@@ -45,6 +47,24 @@ const routes = [
           name: 'singleJury',
           components: {
             default: singleJury,
+            'header': Header,
+            'side-menu': SideMenu
+          }
+        },
+        {
+          path: '/jiri/jury/:juryId/:memberId',
+          name: 'memberJury',
+          components: {
+            default: memberJury,
+            'header': Header,
+            'side-menu': SideMenu
+          }
+        },
+        {
+          path: '/jiri/jury/:juryId/:memberId/:studentId',
+          name: 'memberStudent',
+          components: {
+            default: memberStudent,
             'header': Header,
             'side-menu': SideMenu
           }

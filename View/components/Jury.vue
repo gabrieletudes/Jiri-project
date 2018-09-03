@@ -8,7 +8,7 @@
       <el-step title="Etudiants participants"></el-step>
       <el-step title="Membres participants"></el-step>
     </el-steps>
-    <component v-if="active < 4" :is="currentComponent" :newJury="newJury" :academicYears="academicYears" :formInline="formInline"></component>
+    <component v-if="active < 4" :is="currentComponent" :newJury="newJury" :academicYears="academicYears"></component>
     <p v-else class="el-icon-circle-check-outline">Le jury a etait crée</p>
     <el-button-group class="el-button-group--margin-top-small el-space--bottom-medium ">
       <el-button v-if="active > 0 && active < 3" type="primary" icon="el-icon-arrow-left" @click="previous">{{buttontitle.titles[active-1]}}</el-button>
@@ -18,7 +18,7 @@
     <!--End Jury add step-->
     <div v-show="active == 0">
     <h2>Les jurys en cours ou a venir</h2>
-    <el-row type="flex" :gutter="20">
+    <el-row v-if="juryevents.length" type="flex" :gutter="20">
       <el-col :span="8" class="el-col--max-small" v-for="singleevent in juryevents" :key="singleevent.id">
         <div class="grid-content box box--light box--space-small shadow--hover">
           <h3><router-link :to="{ name: 'singleJury', params: { juryId: singleevent.id}}" class="grid-content el-col__link">{{singleevent.courseName}}</router-link></h3>
@@ -44,6 +44,7 @@
         </div>
       </el-col>
     </el-row>
+    <p v-else>Vous n'avez pas encore organisé des jurys</p>
     </div>
   </el-main>
 </template>
@@ -77,6 +78,7 @@ export default {
         ]
       },
       currentComponent: 'jury-add-description',
+      authorId: this.$store.state.theuserId,
       newJury: {
         thememberId: null,
         juryname: null,
@@ -96,6 +98,12 @@ export default {
     juryevents: {
       // gql query
       query: QUERY_FEW_EVENTS,
+      variables() {
+        // Use vue reactive properties here
+        return {
+          authorId: this.authorId,
+        }
+      },
       update(data){
         return data.allEvents
       }
@@ -118,6 +126,23 @@ export default {
         projects: this.newJury.projects
       }
       EventBus.$emit('createEvent',evenement);
+      this.active = 4
+      this.$notify({
+          title: 'Evenement Cree',
+          message: 'Le jury à etait bien crée',
+          type: 'success'
+        });
+      router.push('/')
+      this.newJury = {
+        thememberId: null,
+        juryname: null,
+        academicYear: null,
+        start: null,
+        softDelete: false,
+        students:[],
+        projects:[],
+        members:[]
+      }
     },
     createAcademicYears(){
       let currentDate = new Date()

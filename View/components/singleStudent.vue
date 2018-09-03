@@ -39,11 +39,12 @@
 </template>
 <script>
 import Vue from 'vue';
-import { QUERY_SINGLE_STUDENT, CREATE_STUDENT_MUTATION} from '../querys/AllStudents.gql'
+import { QUERY_SINGLE_STUDENT } from '../querys/AllStudents.gql'
 import EventBus from '../event-bus'
 export default {
   data(){
     return{
+      authorId: this.$store.state.theuserId,
       studentId: this.$route.params.studentId,
       editfield: false,
       newstudent:{
@@ -66,6 +67,7 @@ export default {
         // Use vue reactive properties here
         return {
           studentId: this.studentId,
+          authorId: this.authorId
         }
       },
       update(data){
